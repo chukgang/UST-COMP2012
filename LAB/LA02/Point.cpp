@@ -3,7 +3,12 @@
 #include <Point.h> 
 using namespace std  
 
-Point::Point(const int dim, const int* co); 	
+Point::Point(const int dim, const int* co)：dimension（dim）{
+  coordinates = new int[dimension];
+  for (int i = 0; i < dimension; i++){
+    coordinates[i] = co[i];  
+  }
+} 	
 
 
 

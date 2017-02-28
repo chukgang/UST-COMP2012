@@ -9,39 +9,38 @@ private:
 	const int dimension;
 	int* coordinates;
 public:
-	Point(const int dim, const int* co):
-		dimension(dim)
-		{
+	Point(const int dim, const int* co):dimension(dim){
 		coordinates = new int [dimension];
-		 for (int i = 0; i < dimension ; i++)
-		 {
+		 for (int i = 0; i < dimension ; i++){
 			coordinates[i] = co[i];
 		 }
-		}
-	Point(const Point& p) : dimension(p.dimension)
-	{
+	}
+	
+	Point(const Point& p) : dimension(p.dimension){
 		coordinates = new int [dimension];
-		 for (int i = 0; i < dimension ; i++)
-		 {
+		 for (int i = 0; i < dimension ; i++){
 			coordinates[i] = p.coordinates[i];
 		 }
 	}
-	~Point() {delete coordinates;}
-	int getDim() const {return dimension;}
-	double dist(const Point& p) const
-	{
-		if (dimension != p.dimension)
+	
+	~Point() {
+		delete []coordinates;
+	}
+	
+	int getDim() const{
+		return dimension;
+	}
+	
+	double dist(const Point& p) const{
+		if (dimension != p.dimension){
 			cout << "Error: Dimensions of two points do not match." << endl;
-		else
-		{
+		}else{
 			double* diff = new double [dimension];
-			for (int i= 0; i< dimension; i++)
-			{
+			for (int i= 0; i< dimension; i++){
 				diff[i] = p.coordinates[i] - coordinates[i];
 			}
 			double sum_of_diff = 0;
-			for (int j = 0; j< dimension; j++)
-			{
+			for (int j = 0; j< dimension; j++){
 				sum_of_diff += diff[j]*diff[j];
 			}
 			delete diff;
@@ -49,24 +48,25 @@ public:
 		}
 		return 0;
 	}
-	void print() const
-		{cout << "(" ;
-		 for (int i=0; i<dimension;i++)
-		 {
+	
+	void print() const{
+		cout << "(" ;
+		 for (int i=0; i<dimension;i++) {
 			 cout << coordinates[i];
-			 if (i != dimension -1)
+			 if (i != dimension -1){
 				 cout << ", ";
+			 }
 		 }
 		 cout << ")";
-		}
-	void translate(const int dim, const int diff)
-		{if (dim > dimension)
+	}
+	
+	void translate(const int dim, const int diff){
+		if (dim > dimension){
 			cout << "Error: Dimension is invalid." << endl;
-		else
-		{
+		}else{
 			coordinates[dim-1]+= diff;
 		}
-		}
+	}
 };
 
 #endif

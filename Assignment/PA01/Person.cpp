@@ -111,23 +111,18 @@ using namespace std;
     		return true;
     	}
     }
-//
-//    void printActivities() const  //print all the activities for this person; already completed; do not modify
-//    {
-//        cout << name  << "'s schedule:" << endl;
-//        if(activityCount == 0)
-//        	cout << "None." << endl;
-//        else
-//        {
-//			for(int i=0; i<activityCount; i++)
-//			{
-//				activities[i]->print();
-//			}
-//        }
-//    }
-//
-//private:
-//    string name; //the string that stores the person's name
-//    Activity** activities; //the dynamic array, which is just big enough, that stores all the activities for this person; it should be NULL at the beginning
-//    int activityCount; //the number of activities this person has; it should be 0 at the beginning
-//};
+
+//print all the activities for this person; already completed; do not modify
+    void Person::printActivities() const
+    {
+        cout << name  << "'s schedule:" << endl;
+        if(activityCount == 0)
+        	cout << "None." << endl;
+        else
+        {
+			for(int i=0; i<activityCount; i++)
+			{
+				activities[i]->print();
+			}
+        }
+    }

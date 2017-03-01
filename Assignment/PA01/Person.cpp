@@ -113,16 +113,13 @@ using namespace std;
     }
 
 //print all the activities for this person; already completed; do not modify
-    void Person::printActivities() const
-    {
+    void Person::printActivities() const{
         cout << name  << "'s schedule:" << endl;
-        if(activityCount == 0)
+        if(activityCount == 0){
         	cout << "None." << endl;
-        else
-        {
-			for(int i=0; i<activityCount; i++)
-			{
-				activities[i]->print();
-			}
+	} else{
+		for(int i=0; i<activityCount; i++){
+			activities[i]->print();
+		}
         }
     }

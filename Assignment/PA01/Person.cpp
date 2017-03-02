@@ -16,7 +16,7 @@ using namespace std;
 
 //destructor;  hint: remember to deallocate any dynamically-allocated memory
 	Person::~Person(){
-		delete activities;
+		delete []activities;
 	}
 
 //return the person's name
@@ -35,8 +35,8 @@ using namespace std;
  */
     bool Person::addActivity(const Activity& activity){
     	if(activityCount == 0){
+    		activities[activityCount] = &activity;
     		activityCount++;
-    		activities = activity;
     		return true;
     	}else{
     		for(int i = 0; i < activityCount; i++){
@@ -50,11 +50,11 @@ using namespace std;
     		    if ((activities[i]->getTimeslot()).getStartTime() > (activity.getTimeslot()).getStartTime()){
     		    	activityCount++;
     		    	activities[i+1] = activities[i];
-    		    	activities[i] = activity;
+    		    	activities[i] = &activity;
     		    	return true;
     		    }
     		}
-    		activities[activityCount] = activity;
+    		activities[activityCount] = &activity;
     		activityCount++;
     		return true;
     	}
@@ -112,14 +112,14 @@ using namespace std;
     	}
     }
 
-//print all the activities for this person; already completed; do not modify
-    void Person::printActivities() const{
-        cout << name  << "'s schedule:" << endl;
-        if(activityCount == 0){
-        	cout << "None." << endl;
-	} else{
-		for(int i=0; i<activityCount; i++){
-			activities[i]->print();
-		}
-        }
-    }
+////print all the activities for this person; already completed; do not modify
+//    void Person::printActivities() const{
+//        cout << name  << "'s schedule:" << endl;
+//        if(activityCount == 0){
+//        	cout << "None." << endl;
+//	} else{
+//		for(int i=0; i<activityCount; i++){
+//			activities[i]->print();
+//		}
+//        }
+//    }

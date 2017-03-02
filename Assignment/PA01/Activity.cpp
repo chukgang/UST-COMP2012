@@ -25,8 +25,8 @@ using namespace std;
     	return timeslot;
     }
 
-//print the name and timeslot of the activity; already completed; do not modify
-    void Activity::print() const{
-            timeslot.print();
-            cout << " " << name << endl;
-        }
+////print the name and timeslot of the activity; already completed; do not modify
+//    void Activity::print() const{
+//            timeslot.print();
+//            cout << " " << name << endl;
+//    }

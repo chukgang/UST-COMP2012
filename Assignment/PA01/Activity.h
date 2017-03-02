@@ -1,6 +1,9 @@
 //do NOT submit this file.
 //do NOT modify this file.
 
+#ifndef _ACTIVITY_H_
+#define _ACTIVITY_H_
+
 #include <iostream>
 #include <string>
 #include "Timeslot.h"
@@ -24,3 +27,5 @@ private:
     string name; //the string that stores the activity's name
     Timeslot timeslot; //the timeslot object which stores the start time and end time for this activity
 };
+
+#endif

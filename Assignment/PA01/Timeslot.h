@@ -1,6 +1,9 @@
 //do NOT submit this file.
 //do NOT modify this file.
 
+#ifndef _TIMESLOT_H_
+#define _TIMESLOT_H_
+
 #include <iostream>
 using namespace std;
 
@@ -34,3 +37,5 @@ private:
     int endTime; //the end time (exclusive), can be 1, 2, ..., 24, where 24 denotes the end of the day (which is basically the hour 0 of the next day)
     //see webpage description for details and examples
 };
+
+#endif

@@ -1,6 +1,9 @@
 //do NOT submit this file.
 //do NOT modify this file.
 
+#ifndef _TIMEMANAGER_H_
+#define _TIMEMANAGER_H_
+
 #include "Person.h"
 
 class TimeManager
@@ -79,3 +82,5 @@ private:
     Person** persons; //the dynamic array, which is just big enough, that stores all the persons in the system; it should be NULL at the beginning
     int personCount; //the number of persons; it should be 0 at the beginning
 };
+
+#endif

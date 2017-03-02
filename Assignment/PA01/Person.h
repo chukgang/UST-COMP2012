@@ -1,6 +1,9 @@
 //do NOT submit this file.
 //do NOT modify this file.
 
+#ifndef _PERSON_H_
+#define _PERSON_H_
+
 #include <iostream>
 #include <string>
 #include "Activity.h"
@@ -68,3 +71,5 @@ private:
     Activity** activities; //the dynamic array, which is just big enough, that stores all the activities for this person; it should be NULL at the beginning
     int activityCount; //the number of activities this person has; it should be 0 at the beginning
 };
+
+#endif

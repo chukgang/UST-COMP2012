@@ -1,18 +1,18 @@
 //submit this file.
 //you must use this exact file name.
 
-#include "Activity.h"
+
 #include <iostream>
 #include <string>
 #include "Timeslot.h"
+#include "Activity.h"
 
 using namespace std;
 
 
 //constructor
-    Activity::Activity(string name, const Timeslot& timeslot){
-    	this->name = name;
-    	this->timeslot = timeslot;
+    Activity::Activity(string name, const Timeslot& timeslot) : name(name), timeslot(timeslot){
+
     }
 
 //return the acitivity's name

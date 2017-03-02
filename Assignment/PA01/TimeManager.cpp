@@ -44,7 +44,17 @@
  * (1) the person cannot be found by the given name
  * (2) calling the function addActivity on the found person object returns false (which signals that it cannot be done for some reason)
  */
-    bool addActivityForPerson(string personName, const Activity& activity);
+    bool addActivityForPerson(string personName, const Activity& activity){
+	if(personCount == 0){
+	    return false;
+	}
+	for(int i = 0; i < personCount; i++){
+		if(personName == persons[i]->name){
+			return persons[i]->addActivity(activity);
+		}
+	}
+	return false;
+    }
 
     /*
 	 * remove the specified person and return true if it can be done successfully

@@ -34,6 +34,7 @@ using namespace std;
  */
     bool Person::addActivity(const Activity& activity){
     	if(activityCount == 0){
+    		activities = new Activity*[activityCount+1];
     		*activities[activityCount] = activity;
     		activityCount++;
     		return true;
@@ -47,17 +48,37 @@ using namespace std;
     		}
     		for(int i = 0; i < activityCount; i++){
     		    if ((activities[i]->getTimeslot()).getStartTime() > (activity.getTimeslot()).getStartTime()){
-    		    	for(int j = activityCount; j > i; j--){
-    		    		activities[j] = activities[j-1];
-    		    	}
-    		    	*activities[i] = activity;
-    		    	activityCount++;
-    		    	return true;
+    		    	Activity* before[activityCount];
+    		    	Activity* after[activityCount+1];
+					for(int j = 0; j < i; j++){
+						before[j] = activities[j];
+					}
+					for(int k = activityCount; k > i; k--){
+						after[k] = activities[k-1];
+					}
+					delete []activities;
+					activities = new Activity*[++activityCount];
+					for(int j = 0; j < i; j++){
+						activities[j] = before[j];
+					}
+					*activities[i] = activity;
+					for(int k = activityCount-1; k > i; k--){
+						activities[k] = after[k];
+					}
+					return true;
     		    }
     		}
-    		*activities[activityCount] = activity;
-    		activityCount++;
-    		return true;
+    		Activity* backup[activityCount];
+			for(int j = 0; j < activityCount; j++){
+				backup[j] = activities[j];
+			}
+			delete []activities;
+			activities = new Activity*[++activityCount];
+			for(int k = 0; k < activityCount; k++){
+				activities[k] = backup[k];
+			}
+			*activities[activityCount-1] = activity;
+			return true;
     	}
     }
 

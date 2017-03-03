@@ -35,12 +35,12 @@
     		for(int j = 0; j < personCount; j++){
     			backup[j] = persons[j];
     		}
-    		delete persons;
+    		delete []persons;
     		persons = new Person*[++personCount];
     		for(int k = 0; k < personCount; k++){
     			persons[k] = backup[k];
     		}
-    		persons[personCount] = new Person(name);
+    		persons[personCount-1] = new Person(name);
     		return true;
     	}
     }
@@ -52,11 +52,14 @@
  * (2) calling the function addActivity on the found person object returns false (which signals that it cannot be done for some reason)
  */
     bool TimeManager::addActivityForPerson(string personName, const Activity& activity){
+    	cout << personCount << endl;
     	if(personCount == 0){
     		return false;
     	}
     	for(int i = 0; i < personCount; i++){
+        	cout << personCount << endl;
     		if(personName == persons[i]->getName()){
+    	    	cout << personCount << endl;
     			return persons[i]->addActivity(activity);
     		}
     	}

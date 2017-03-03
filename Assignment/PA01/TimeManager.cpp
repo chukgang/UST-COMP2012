@@ -71,7 +71,34 @@
 	 * do nothing and return false if it cannot be done - which means the person cannot be found by the given name
 	 */
     bool TimeManager::removePerson(string name){
-    	return true;
+    	if(personCount == 0){
+    		return false;
+    	}else{
+    		for(int i = 0; i < personCount; i++){
+    			if(name == persons[i]->getName()){
+    	    		Person* backup[personCount];
+    	    		for(int j = 0; j < personCount; j++){
+    	    			backup[j] = persons[j];
+    	    		}
+    	    		print();
+    	    		delete []persons;
+    	    		persons = new Person*[--personCount];
+    	    		for(int j = 0; j < personCount + 1; j++){
+    	    			cout << j << endl;
+    	    			if(j == i){
+    	    				j++;
+    	    			}
+    	    			cout << j << endl;
+        	    		for(int k = 0; k < personCount; k++){
+        	    			persons[k] = backup[j];
+        	    		}
+    	    		}
+    	    		print();
+    	    		return true;
+    			}
+    		}
+    		return false;
+    	}
     }
 
     /*

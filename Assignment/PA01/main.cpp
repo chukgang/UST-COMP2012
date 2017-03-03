@@ -107,20 +107,20 @@ int main()
                 else cout << activityName << " cannot be removed - activity not found." << endl;
                 break;
             }
-            case 6:
-            {
-            	cout << "Let's find the earliest free timeslot." << endl;
-            	Timeslot* timeslot = timeManager.findFirstCommonTimeslot();
-            	if(timeslot == NULL) cout << "No common timeslot is found." << endl;
-            	else
-            	{
-            		cout << "The first common timeslot is ";
-            		timeslot->print();
-            		cout << endl;
-            	}
-            	delete timeslot;
-            	break;
-            }
+//            case 6:
+//            {
+//            	cout << "Let's find the earliest free timeslot." << endl;
+//            	Timeslot* timeslot = timeManager.findFirstCommonTimeslot();
+//            	if(timeslot == NULL) cout << "No common timeslot is found." << endl;
+//            	else
+//            	{
+//            		cout << "The first common timeslot is ";
+//            		timeslot->print();
+//            		cout << endl;
+//            	}
+//            	delete timeslot;
+//            	break;
+//            }
             case 7:
             {
             	cout << "Let's find all common free timeslots." << endl;

@@ -53,7 +53,7 @@ public:
      * simply return NULL if no common timeslot is found
      * you can assume there is at least one person added when this function is called
      */
-    Timeslot* findFirstCommonTimeslot() const;
+ //   Timeslot* findFirstCommonTimeslot() const;
 
     /*
      * find all the common timeslots for all persons

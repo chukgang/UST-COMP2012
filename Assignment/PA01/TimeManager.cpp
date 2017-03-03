@@ -21,8 +21,8 @@
  */
     bool TimeManager::addPerson(string name){
     	if(personCount == 0){
-    		Person* person(name);
-    		persons[personCount] = person;
+    		persons = new Person*[personCount+1];
+    		persons[personCount] = new Person(name);
     		personCount++;
     		return true;
     	}else{
@@ -31,9 +31,16 @@
     				return false;
     			}
     		}
-    		Person* person(name);
-    		persons[personCount] = person;
-    		personCount++;
+    		Person* backup[personCount];
+    		for(int j = 0; j < personCount; j++){
+    			backup[j] = persons[j];
+    		}
+    		delete persons;
+    		persons = new Person*[++personCount];
+    		for(int k = 0; k < personCount; k++){
+    			persons[k] = backup[k];
+    		}
+    		persons[personCount] = new Person(name);
     		return true;
     	}
     }
@@ -44,23 +51,25 @@
  * (1) the person cannot be found by the given name
  * (2) calling the function addActivity on the found person object returns false (which signals that it cannot be done for some reason)
  */
-    bool addActivityForPerson(string personName, const Activity& activity){
-	if(personCount == 0){
-	    return false;
-	}
-	for(int i = 0; i < personCount; i++){
-		if(personName == persons[i]->name){
-			return persons[i]->addActivity(activity);
-		}
-	}
-	return false;
+    bool TimeManager::addActivityForPerson(string personName, const Activity& activity){
+    	if(personCount == 0){
+    		return false;
+    	}
+    	for(int i = 0; i < personCount; i++){
+    		if(personName == persons[i]->getName()){
+    			return persons[i]->addActivity(activity);
+    		}
+    	}
+    	return false;
     }
 
     /*
 	 * remove the specified person and return true if it can be done successfully
 	 * do nothing and return false if it cannot be done - which means the person cannot be found by the given name
 	 */
-    bool removePerson(string name);
+    bool TimeManager::removePerson(string name){
+    	return true;
+    }
 
     /*
 	 * remove the specified activity for the specified person and return true if it can be done successfully
@@ -68,13 +77,17 @@
 	 * (1) the person cannot be found by the given name
 	 * (2) calling the function removeActivity on the found person object returns false (which signals that it cannot be done for some reason)
 	 */
-    bool removeActivityForPerson(string personName, string activityName);
+    bool TimeManager::removeActivityForPerson(string personName, string activityName){
+    	return true;
+    }
 
     /*
      * return true if a person with the given name exists already
      * return false otherwise
      */
-    bool doesPersonExist(string name) const;
+    bool TimeManager::doesPersonExist(string name) const{
+    	return true;
+    }
 
     /*
      * find the first (i.e. earliest) common timeslot for all persons
@@ -83,7 +96,9 @@
      * simply return NULL if no common timeslot is found
      * you can assume there is at least one person added when this function is called
      */
-    Timeslot* findFirstCommonTimeslot() const;
+//    Timeslot* TimeManager::findFirstCommonTimeslot() const{
+//    	return person;
+//    }
 
     /*
      * find all the common timeslots for all persons
@@ -93,7 +108,9 @@
      * "results" should be set to NULL and "timeslotCount" should be set to 0 if no common timeslot is found
      * you can assume there is at least one person added when this function is called
      */
-    void findAllCommonTimeslots(Timeslot**& results, int& timeslotCount) const;
+    void TimeManager::findAllCommonTimeslots(Timeslot**& results, int& timeslotCount) const{
+
+    }
 
 //    void print() const //print the schedule of all persons one by one; already completed; do not modify
 //    {

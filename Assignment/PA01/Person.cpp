@@ -8,8 +8,7 @@
 using namespace std;
 
 //constructor; hint: remember to initialize activityCount to 0 and activities to NULL
-	Person::Person(string name){
-		this->name = name;
+	Person::Person(string name) : name(name){
 		activityCount = 0;
 		activities = NULL;
 	}
@@ -35,7 +34,7 @@ using namespace std;
  */
     bool Person::addActivity(const Activity& activity){
     	if(activityCount == 0){
-    		activities[activityCount] = &activity;
+    		*activities[activityCount] = activity;
     		activityCount++;
     		return true;
     	}else{
@@ -48,13 +47,15 @@ using namespace std;
     		}
     		for(int i = 0; i < activityCount; i++){
     		    if ((activities[i]->getTimeslot()).getStartTime() > (activity.getTimeslot()).getStartTime()){
+    		    	for(int j = activityCount; j > i; j--){
+    		    		activities[j] = activities[j-1];
+    		    	}
+    		    	*activities[i] = activity;
     		    	activityCount++;
-    		    	activities[i+1] = activities[i];
-    		    	activities[i] = &activity;
     		    	return true;
     		    }
     		}
-    		activities[activityCount] = &activity;
+    		*activities[activityCount] = activity;
     		activityCount++;
     		return true;
     	}

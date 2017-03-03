@@ -6,9 +6,7 @@
 using namespace std;
 
 //constructor
-    Timeslot::Timeslot(int startTime, int endTime){
-    	this->startTime = startTime;
-    	this->endTime = endTime;
+    Timeslot::Timeslot(int startTime, int endTime) : startTime(startTime), endTime(endTime){
     }
 
 //return true if there is a time conflict with another timeslot

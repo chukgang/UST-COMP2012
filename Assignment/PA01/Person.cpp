@@ -35,7 +35,7 @@ using namespace std;
     bool Person::addActivity(const Activity& activity){
     	if(activityCount == 0){
     		activities = new Activity*[activityCount+1];
-    		*activities[activityCount] = activity;
+    		activities[activityCount] = new Activity(activity.getName(), activity.getTimeslot());
     		activityCount++;
     		return true;
     	}else{
@@ -44,7 +44,9 @@ using namespace std;
     				return false;
     			} else if((activities[i]->getTimeslot()).hasConflictsWith(activity.getTimeslot())){
     				return false;
-    			}
+    			} else{
+    				continue;
+				}
     		}
     		for(int i = 0; i < activityCount; i++){
     		    if ((activities[i]->getTimeslot()).getStartTime() > (activity.getTimeslot()).getStartTime()){
@@ -61,10 +63,12 @@ using namespace std;
 					for(int j = 0; j < i; j++){
 						activities[j] = before[j];
 					}
-					*activities[i] = activity;
+					activities[i] = new Activity(activity.getName(), activity.getTimeslot());
 					for(int k = activityCount-1; k > i; k--){
 						activities[k] = after[k];
 					}
+					delete []before;
+					delete []after;
 					return true;
     		    }
     		}
@@ -77,7 +81,8 @@ using namespace std;
 			for(int k = 0; k < activityCount; k++){
 				activities[k] = backup[k];
 			}
-			*activities[activityCount-1] = activity;
+			activities[activityCount-1] = new Activity(activity.getName(), activity.getTimeslot());
+			delete []backup;
 			return true;
     	}
     }
@@ -92,12 +97,19 @@ using namespace std;
     	}else{
     		for(int i = 0; i < activityCount; i++){
     			if(activities[i]->getName() == activityName){
-    				delete activities[i];
-    				activityCount--;
-    				for(int j = i; j < activityCount; j++){
-    					activities[j] = activities[j+1];
+    				Activity* backup[activityCount];
+    				for(int j = 0; j < activityCount; j++){
+    					backup[j] = activities[j];
+					}
+    				delete []activities;
+    				activities = new Activity*[--activityCount];
+    				for(int j = 0, k = 0; j < activityCount; j++, k++){
+    					if(j == i){
+    						j++;
+						}
+						activities[k] = backup[j];
     				}
-    				delete activities[activityCount-1];
+    				delete []backup;
     				return true;
     			}
     		}
@@ -126,7 +138,7 @@ using namespace std;
     		return true;
     	}else{
     		for(int i = 0; i < activityCount; i++){
-    			if (hour>(activities[i]->getTimeslot()).getStartTime()&&hour<(activities[i]->getTimeslot()).getEndTime()){
+    			if (hour>=(activities[i]->getTimeslot()).getStartTime()&&hour<(activities[i]->getTimeslot()).getEndTime()){
     				return false;
     			}
     		}

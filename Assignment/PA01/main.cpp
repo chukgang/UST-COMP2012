@@ -31,7 +31,18 @@ string getStringInput(string question)
 //main is the entry point of the program
 int main()
 {
-    TimeManager timeManager;
+      TimeManager timeManager;
+//    timeManager.addPerson("Tim");
+//    timeManager.addActivityForPerson("Tim", Activity("Breakfast", Timeslot(0, 1)));
+//    timeManager.addActivityForPerson("Tim", Activity("LAB", Timeslot(5, 7)));
+//    timeManager.addActivityForPerson("Tim", Activity("COMP2012LA01", Timeslot(3, 5)));
+//    timeManager.addPerson("Jessica");
+//    timeManager.addActivityForPerson("Jessica", Activity("Lunch", Timeslot(12, 13)));
+//    timeManager.addActivityForPerson("Jessica", Activity("LAB", Timeslot(15, 17)));
+//    timeManager.addActivityForPerson("Jessica", Activity("LAB", Timeslot(15, 17)));
+//    timeManager.addActivityForPerson("Jessica", Activity("COMP2012LA01", Timeslot(13, 15)));
+//    timeManager.removeActivityForPerson("Jessica", "LAB");
+    //timeManager.removePerson("Tim");
 
     cout << "Thanks for using the Time Management System!" << endl << endl;
 
@@ -107,20 +118,20 @@ int main()
                 else cout << activityName << " cannot be removed - activity not found." << endl;
                 break;
             }
-//            case 6:
-//            {
-//            	cout << "Let's find the earliest free timeslot." << endl;
-//            	Timeslot* timeslot = timeManager.findFirstCommonTimeslot();
-//            	if(timeslot == NULL) cout << "No common timeslot is found." << endl;
-//            	else
-//            	{
-//            		cout << "The first common timeslot is ";
-//            		timeslot->print();
-//            		cout << endl;
-//            	}
-//            	delete timeslot;
-//            	break;
-//            }
+            case 6:
+            {
+            	cout << "Let's find the earliest free timeslot." << endl;
+            	Timeslot* timeslot = timeManager.findFirstCommonTimeslot();
+            	if(timeslot == NULL) cout << "No common timeslot is found." << endl;
+            	else
+            	{
+            		cout << "The first common timeslot is ";
+            		timeslot->print();
+            		cout << endl;
+            	}
+            	delete timeslot;
+            	break;
+            }
             case 7:
             {
             	cout << "Let's find all common free timeslots." << endl;

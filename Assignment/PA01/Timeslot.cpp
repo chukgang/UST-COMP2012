@@ -13,7 +13,7 @@ using namespace std;
 //return false otherwise
 //e.g. [03:00-05:00] conflicts with [04:00-06:00] and [02:00-06:00], but not [05:00-06:00]
     bool Timeslot::hasConflictsWith(const Timeslot& another) const{
-    	if(getStartTime()<another.getEndTime()||getEndTime()>another.getStartTime()){
+    	if(((this->getStartTime()<another.getEndTime())&&(this->getStartTime()>=another.getStartTime()))||((this->getEndTime()>another.getStartTime())&&(this->getEndTime()<=another.getEndTime()))){
     		return true;
     	}else{
     		return false;

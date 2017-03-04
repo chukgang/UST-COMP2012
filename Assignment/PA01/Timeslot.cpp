@@ -31,15 +31,13 @@ using namespace std;
     }
 
 ////a helper function to format and print the hour; already completed; do not modify
-//    void Timeslot::printHour(int hour) const
-//    {
+//    void Timeslot::printHour(int hour) const{
 //        cout << (hour<=9?"0":"") << hour << ":00";
 //    }
 //
 ////print the timeslot information; already completed; do not modify
-//    void Timeslot::print() const
-//    {
-//    	cout << "[";
+//    void Timeslot::print() const{
+//    	  cout << "[";
 //        printHour(startTime);
 //        cout << "-";
 //        printHour(endTime);

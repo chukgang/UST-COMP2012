@@ -229,14 +229,13 @@
 		}
     }
 
-//    void print() const //print the schedule of all persons one by one; already completed; do not modify
-//    {
-//    	if(personCount == 0) cout << "There is nothing in the database yet." << endl;
-//    	else
-//    	{
+//print the schedule of all persons one by one; already completed; do not modify
+//    void print() const{
+//    	if(personCount == 0){
+//    		cout << "There is nothing in the database yet." << endl;
+//		}else{
 //    		cout << "Listing schedule of all " << personCount << " "<< (personCount>1?"persons":"person") << "..." << endl;
-//    		for(int i=0; i<personCount; i++)
-//    		{
+//    		for(int i=0; i<personCount; i++){
 //    			persons[i]->printActivities();
 //    		}
 //    	}

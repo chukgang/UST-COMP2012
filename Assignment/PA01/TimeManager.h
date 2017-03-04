@@ -6,8 +6,8 @@
 
 #include "Person.h"
 
-class TimeManager
-{
+class TimeManager{
+	
 public:
     TimeManager(); //constructor; hint: remember to initialize personCount to 0 and persons to NULL
     ~TimeManager(); //destructor; hint: remember to deallocate any dynamically-allocated memory
@@ -65,14 +65,13 @@ public:
      */
     void findAllCommonTimeslots(Timeslot**& results, int& timeslotCount) const;
 
-    void print() const //print the schedule of all persons one by one; already completed; do not modify
-    {
-    	if(personCount == 0) cout << "There is nothing in the database yet." << endl;
-    	else
-    	{
+	//print the schedule of all persons one by one; already completed; do not modify
+    void print() const{
+    	if(personCount == 0){
+    		cout << "There is nothing in the database yet." << endl;
+		}else{
     		cout << "Listing schedule of all " << personCount << " "<< (personCount>1?"persons":"person") << "..." << endl;
-    		for(int i=0; i<personCount; i++)
-    		{
+    		for(int i=0; i<personCount; i++){
     			persons[i]->printActivities();
     		}
     	}

@@ -7,8 +7,8 @@
 #include <iostream>
 using namespace std;
 
-class Timeslot
-{
+class Timeslot{
+	
 public:
     Timeslot(int startTime, int endTime); //constructor
 
@@ -20,18 +20,20 @@ public:
     int getStartTime() const; //return the start time
     int getEndTime() const; //return the end time
 
-    void printHour(int hour) const //a helper function to format and print the hour; already completed; do not modify
-    {
+	//a helper function to format and print the hour; already completed; do not modify
+    void printHour(int hour) const{
         cout << (hour<=9?"0":"") << hour << ":00";
     }
-    void print() const //print the timeslot information; already completed; do not modify
-    {
+    
+	//print the timeslot information; already completed; do not modify
+    void print() const{
     	cout << "[";
         printHour(startTime);
         cout << "-";
         printHour(endTime);
         cout << "]";
     }
+    
 private:
     int startTime; //the start time (inclusive), can be 0, 1, ..., 23
     int endTime; //the end time (exclusive), can be 1, 2, ..., 24, where 24 denotes the end of the day (which is basically the hour 0 of the next day)

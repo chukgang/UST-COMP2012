@@ -151,9 +151,9 @@ using namespace std;
 //        cout << name  << "'s schedule:" << endl;
 //        if(activityCount == 0){
 //        	cout << "None." << endl;
-//	} else{
-//		for(int i=0; i<activityCount; i++){
-//			activities[i]->print();
-//		}
+//		}else{
+//			for(int i=0; i<activityCount; i++){
+//				activities[i]->print();
+//			}
 //        }
 //    }

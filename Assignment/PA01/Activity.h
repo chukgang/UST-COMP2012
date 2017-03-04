@@ -10,15 +10,15 @@
 
 using namespace std;
 
-class Activity
-{
+class Activity{
+	
 public:
     Activity(string name, const Timeslot& timeslot); //constructor
     string getName() const; //return the acitivity's name
 	const Timeslot& getTimeslot() const; //return the acitivity's timeslot
 
-    void print() const //print the name and timeslot of the activity; already completed; do not modify
-    {
+	//print the name and timeslot of the activity; already completed; do not modify
+    void print() const{
         timeslot.print();
         cout << " " << name << endl;
     }

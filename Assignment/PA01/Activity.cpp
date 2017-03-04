@@ -12,7 +12,6 @@ using namespace std;
 
 //constructor
     Activity::Activity(string name, const Timeslot& timeslot) : name(name), timeslot(timeslot){
-
     }
 
 //return the acitivity's name

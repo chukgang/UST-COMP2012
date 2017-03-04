@@ -10,8 +10,8 @@
 
 using namespace std;
 
-class Person
-{
+class Person{
+	
 public:
     Person(string name); //constructor; hint: remember to initialize activityCount to 0 and activities to NULL
     ~Person(); //destructor;  hint: remember to deallocate any dynamically-allocated memory
@@ -52,15 +52,13 @@ public:
      */
     bool isFreeAtHour(int hour) const;
 
-    void printActivities() const  //print all the activities for this person; already completed; do not modify
-    {
+	//print all the activities for this person; already completed; do not modify
+    void printActivities() const{
         cout << name  << "'s schedule:" << endl;
-        if(activityCount == 0)
+        if(activityCount == 0){
         	cout << "None." << endl;
-        else
-        {
-			for(int i=0; i<activityCount; i++)
-			{
+		}else{
+			for(int i=0; i<activityCount; i++){
 				activities[i]->print();
 			}
         }

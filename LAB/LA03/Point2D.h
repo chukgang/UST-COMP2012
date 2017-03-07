@@ -6,8 +6,7 @@
 #ifndef POINT2D_H
 #define POINT2D_H
 
-class Point2D
-{
+class Point2D{
 	public:
 		// Copy constructor
 		Point2D(const Point2D& p);

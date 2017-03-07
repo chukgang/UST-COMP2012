@@ -185,8 +185,6 @@
 			timeslotCount = 0;
 		}else{
 			bool freeCommonTimeslot[24];
-			int startTime = 24, endTime = 24;
-			bool startChanged = false, endChanged = false;
 			for(int i = 0; i < 24; i++){
 				freeCommonTimeslot[i] = true;
 			}

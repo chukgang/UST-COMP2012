@@ -62,9 +62,6 @@ using namespace std;
 					for(int k = activityCount; k > i; k--){
 						after[k] = activities[k-1];
 					}
-//					for(int d = 0; d < activityCount; d++){
-//						delete []activities[d];
-//					}
 					delete []activities;
 					activities = new Activity*[++activityCount];
 					for(int j = 0; j < i; j++){
@@ -74,8 +71,6 @@ using namespace std;
 					for(int k = activityCount-1; k > i; k--){
 						activities[k] = after[k];
 					}
-					delete []before;
-					delete []after;
 					return true;
     		    }
     		}
@@ -83,16 +78,12 @@ using namespace std;
 			for(int j = 0; j < activityCount; j++){
 				backup[j] = activities[j];
 			}
-//			for(int d = 0; d < activityCount; d++){
-//				delete []activities[d];
-//			}
 			delete []activities;
 			activities = new Activity*[++activityCount];
 			for(int k = 0; k < activityCount; k++){
 				activities[k] = backup[k];
 			}
 			activities[activityCount-1] = new Activity(activity.getName(), activity.getTimeslot());
-			delete []backup;
 			return true;
     	}
     }
@@ -111,9 +102,7 @@ using namespace std;
     				for(int j = 0; j < activityCount; j++){
     					backup[j] = activities[j];
 					}
-//    				for(int d = 0; d < activityCount; d++){
-//    					delete []activities[d];
-//    				}
+    				//delete activities[i];
     				delete []activities;
     				activities = new Activity*[--activityCount];
     				for(int j = 0, k = 0; j < activityCount; j++, k++){
@@ -122,7 +111,6 @@ using namespace std;
 						}
 						activities[k] = backup[j];
     				}
-    				delete []backup;
     				return true;
     			}
     		}

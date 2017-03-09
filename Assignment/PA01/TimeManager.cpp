@@ -35,15 +35,11 @@
     		for(int j = 0; j < personCount; j++){
     			backup[j] = persons[j];
     		}
-//        	for(int d = 0; d < personCount; d++){
-//        		delete []persons[d];
-//        	}
     		delete []persons;
     		persons = new Person*[++personCount];
     		for(int k = 0; k < personCount; k++){
     			persons[k] = backup[k];
     		}
-    		delete []backup;
     		persons[personCount-1] = new Person(name);
     		return true;
     	}
@@ -81,9 +77,7 @@
     	    		for(int j = 0; j < personCount; j++){
     	    			backup[j] = persons[j];
     	    		}
-//    	        	for(int d = 0; d < personCount; d++){
-//    	        		delete []persons[d];
-//    	        	}
+    	    		//delete persons[i];
     	    		delete []persons;
     	    		persons = new Person*[--personCount];
     	    		for(int j = 0, k = 0; j < personCount + 1; j++, k++){
@@ -92,7 +86,6 @@
     	    			}
         	    		persons[k] = backup[j];
     	    		}
-    	    		delete []backup;
     	    		return true;
     			}
     		}

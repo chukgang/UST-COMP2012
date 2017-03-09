@@ -15,6 +15,9 @@ using namespace std;
 
 //destructor;  hint: remember to deallocate any dynamically-allocated memory
 	Person::~Person(){
+		for(int i = 0; i < activityCount; i++){
+			delete activities[i];
+		}
 		delete []activities;
 	}
 
@@ -50,8 +53,9 @@ using namespace std;
     		}
     		for(int i = 0; i < activityCount; i++){
     		    if ((activities[i]->getTimeslot()).getStartTime() > (activity.getTimeslot()).getStartTime()){
-    		    	Activity* before[activityCount];
-    		    	Activity* after[activityCount+1];
+    		    	int startActivityCount = activityCount;
+    		    	Activity* before[startActivityCount];
+    		    	Activity* after[startActivityCount+1];
 					for(int j = 0; j < i; j++){
 						before[j] = activities[j];
 					}

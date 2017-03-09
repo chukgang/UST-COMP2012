@@ -29,17 +29,23 @@ string getStringInput(string question){
 int main(){
 
       TimeManager timeManager;
-    timeManager.addPerson("Tim");
-    timeManager.addActivityForPerson("Tim", Activity("Breakfast", Timeslot(0, 1)));
-    timeManager.addActivityForPerson("Tim", Activity("LAB", Timeslot(5, 7)));
-    timeManager.addActivityForPerson("Tim", Activity("COMP2012LA01", Timeslot(3, 5)));
-    timeManager.addPerson("Jessica");
-    timeManager.addActivityForPerson("Jessica", Activity("Lunch", Timeslot(12, 13)));
-    timeManager.addActivityForPerson("Jessica", Activity("LAB", Timeslot(15, 17)));
-    timeManager.addActivityForPerson("Jessica", Activity("LAB", Timeslot(15, 17)));
-    timeManager.addActivityForPerson("Jessica", Activity("COMP2012LA01", Timeslot(13, 15)));
-//    timeManager.removeActivityForPerson("Jessica", "LAB");
-//    timeManager.removePerson("Tim");
+      for(int i = 0; i < 10000000000; i++){
+    	  timeManager.addPerson("Tim");
+    	  timeManager.addActivityForPerson("Tim", Activity("Breakfast", Timeslot(0, 1)));
+    	  timeManager.addActivityForPerson("Tim", Activity("LAB", Timeslot(5, 7)));
+    	  timeManager.addActivityForPerson("Tim", Activity("COMP2012LA01", Timeslot(3, 5)));
+    	  timeManager.addPerson("Jessica");
+    	  timeManager.doesPersonExist("Jessica");
+    	  timeManager.addActivityForPerson("Jessica", Activity("Lunch", Timeslot(12, 13)));
+    	  timeManager.addActivityForPerson("Jessica", Activity("LAB", Timeslot(15, 17)));
+    	  timeManager.addActivityForPerson("Jessica", Activity("LAB", Timeslot(15, 17)));
+    	  timeManager.addActivityForPerson("Jessica", Activity("COMP2012LA01", Timeslot(13, 15)));
+    	  timeManager.removeActivityForPerson("Jessica", "LAB");
+    	  timeManager.findFirstCommonTimeslot();
+    	  cout << i << endl;
+    	  timeManager.removePerson("Jessica");
+    	  timeManager.removePerson("Tim");
+      }
 
     cout << "Thanks for using the Time Management System!" << endl << endl;
 

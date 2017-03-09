@@ -12,9 +12,6 @@
 
 //destructor; hint: remember to deallocate any dynamically-allocated memory
     TimeManager::~TimeManager(){
-    	for(int i = 0; i < personCount; i++){
-    		delete persons[i];
-    	}
     	delete []persons;
     }
 
@@ -38,6 +35,9 @@
     		for(int j = 0; j < personCount; j++){
     			backup[j] = persons[j];
     		}
+//        	for(int d = 0; d < personCount; d++){
+//        		delete []persons[d];
+//        	}
     		delete []persons;
     		persons = new Person*[++personCount];
     		for(int k = 0; k < personCount; k++){
@@ -81,6 +81,9 @@
     	    		for(int j = 0; j < personCount; j++){
     	    			backup[j] = persons[j];
     	    		}
+//    	        	for(int d = 0; d < personCount; d++){
+//    	        		delete []persons[d];
+//    	        	}
     	    		delete []persons;
     	    		persons = new Person*[--personCount];
     	    		for(int j = 0, k = 0; j < personCount + 1; j++, k++){

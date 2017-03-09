@@ -29,7 +29,7 @@ string getStringInput(string question){
 int main(){
 
       TimeManager timeManager;
-      for(int i = 0; i < 10000000000; i++){
+      for(int i = 0; i < 10000000000000000000; i++){
     	  timeManager.addPerson("Tim");
     	  timeManager.addActivityForPerson("Tim", Activity("Breakfast", Timeslot(0, 1)));
     	  timeManager.addActivityForPerson("Tim", Activity("LAB", Timeslot(5, 7)));
@@ -42,7 +42,9 @@ int main(){
     	  timeManager.addActivityForPerson("Jessica", Activity("COMP2012LA01", Timeslot(13, 15)));
     	  timeManager.removeActivityForPerson("Jessica", "LAB");
     	  timeManager.findFirstCommonTimeslot();
-    	  cout << i << endl;
+    	  if(i%1000000 == 0){
+    		  cout << i << endl;
+    	  }
     	  timeManager.removePerson("Jessica");
     	  timeManager.removePerson("Tim");
       }

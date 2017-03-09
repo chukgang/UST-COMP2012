@@ -16,7 +16,7 @@ using namespace std;
 //destructor;  hint: remember to deallocate any dynamically-allocated memory
 	Person::~Person(){
 		for(int d = 0; d < activityCount; d++){
-			delete []activities[d];
+			delete activities[d];
 		}
 		delete []activities;
 	}
@@ -102,14 +102,15 @@ using namespace std;
     				for(int j = 0; j < activityCount; j++){
     					backup[j] = activities[j];
 					}
-    				//delete activities[i];
+    				delete activities[i];
     				delete []activities;
     				activities = new Activity*[--activityCount];
     				for(int j = 0, k = 0; j < activityCount; j++, k++){
-    					if(j == i){
-    						j++;
+    					if(j != i){
+    						activities[k] = backup[j];
+						}else{
+							k--;
 						}
-						activities[k] = backup[j];
     				}
     				return true;
     			}

@@ -29,7 +29,7 @@ string getStringInput(string question){
 int main(){
 
       TimeManager timeManager;
-      for(int i = 0; i < 50000000; i++){
+      for(int i = 0; i < 500000; i++){
     	  timeManager.addPerson("Tim");
     	  timeManager.addActivityForPerson("Tim", Activity("Breakfast", Timeslot(0, 1)));
     	  timeManager.addActivityForPerson("Tim", Activity("LAB", Timeslot(5, 7)));

@@ -83,7 +83,7 @@
     	    		delete persons[i];
     	    		delete []persons;
     	    		persons = new Person*[--personCount];
-    	    		for(int j = 0, k = 0; j < personCount; j++, k++){
+    	    		for(int j = 0, k = 0; j < personCount+1; j++, k++){
     	    			if(j != i){
     	    				persons[k] = backup[j];
     	    			}else{

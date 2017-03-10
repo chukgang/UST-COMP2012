@@ -105,7 +105,7 @@ using namespace std;
     				delete activities[i];
     				delete []activities;
     				activities = new Activity*[--activityCount];
-    				for(int j = 0, k = 0; j < activityCount; j++, k++){
+    				for(int j = 0, k = 0; j < activityCount+1; j++, k++){
     					if(j != i){
     						activities[k] = backup[j];
 						}else{

@@ -211,7 +211,6 @@
 					timeslotCount++;
 				}
 			}
-			cout << timeslotCount;
 			results = new Timeslot*[timeslotCount];
 			int currentTime = 0;
 			for(int m = 0; m < timeslotCount; m++){

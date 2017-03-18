@@ -1,0 +1,101 @@
+
+Test case 1 expected output: 
+There is nothing in the database yet.
+Test case 2 expected output: 
+result1=1 {Database of 1 person : (D: No activity.)} 
+Test case 3 expected output: 
+result1=1 result2=1 {Database of 2 persons : (K: No activity.) ; (D: No activity.)} 
+Test case 4 expected output: 
+result1=1 result2=0 {Database of 1 person : (D: No activity.)} 
+Test case 5 expected output: 
+result1=1 result2=1 
+Test case 6 expected output: 
+result1=0 result2=0 
+Test case 7 expected output: 
+result1=1 {Database of 1 person : (d: [00:00-01:00] a)} 
+Test case 8 expected output: 
+result1=1 {Database of 1 person : (d: [23:00-24:00] a)} 
+Test case 9 expected output: 
+result1=1 {Database of 1 person : (d: [12:00-14:00] a)} 
+Test case 10 expected output: 
+result1=1 result2=1 result3=0 {Database of 1 person : (d: [12:00-14:00] a1 , [14:00-16:00] a2)} 
+Test case 11 expected output: 
+result1=1 result2=1 result3=0 {Database of 1 person : (d: [12:00-14:00] a1 , [14:00-16:00] a2)} 
+Test case 12 expected output: 
+result1=1 result2=1 result3=0 {Database of 1 person : (d: [12:00-14:00] a1 , [14:00-16:00] a2)} 
+Test case 13 expected output: 
+result1=1 result2=1 result3=0 {Database of 1 person : (d: [12:00-14:00] a1 , [14:00-16:00] a2)} 
+Test case 14 expected output: 
+result1=0 result2=0 result3=1 {Database of 1 person : (d: [13:00-15:00] a3)} 
+Test case 15 expected output: 
+result1=0 result2=0 result3=1 {Database of 1 person : (d: [13:00-15:00] a3)} 
+Test case 16 expected output: 
+result1=1 result2=0 {Database of 1 person : (d: [12:00-14:00] a4)} 
+Test case 17 expected output: 
+result1=0 result2=1 {Database of 1 person : (d: [10:00-16:00] a5)} 
+Test case 18 expected output: 
+{Database of 3 persons : (c: No activity.) ; (d: No activity.) ; (e: No activity.)} result1=1 {Database of 2 persons : (c: No activity.) ; (e: No activity.)} 
+Test case 19 expected output: 
+{Database of 3 persons : (c: No activity.) ; (d: No activity.) ; (e: No activity.)} result1=0 {Database of 3 persons : (c: No activity.) ; (d: No activity.) ; (e: No activity.)} 
+Test case 20 expected output: 
+{Database of 3 persons : (c: [00:00-01:00] a7) ; (d: [00:00-01:00] a7 , [01:00-02:00] a8 , [02:00-03:00] a9) ; (e: [02:00-03:00] a9)} result1=1 {Database of 3 persons : (c: [00:00-01:00] a7) ; (d: [01:00-02:00] a8 , [02:00-03:00] a9) ; (e: [02:00-03:00] a9)} 
+Test case 21 expected output: 
+{Database of 3 persons : (c: [00:00-01:00] a7) ; (d: [00:00-01:00] a7 , [01:00-02:00] a8 , [02:00-03:00] a9) ; (e: [02:00-03:00] a9)} result1=1 {Database of 3 persons : (c: [00:00-01:00] a7) ; (d: [00:00-01:00] a7 , [02:00-03:00] a9) ; (e: [02:00-03:00] a9)} 
+Test case 22 expected output: 
+{Database of 3 persons : (c: [00:00-01:00] a7) ; (d: [00:00-01:00] a7 , [01:00-02:00] a8 , [02:00-03:00] a9) ; (e: [02:00-03:00] a9)} result1=1 {Database of 3 persons : (c: [00:00-01:00] a7) ; (d: [00:00-01:00] a7 , [01:00-02:00] a8) ; (e: [02:00-03:00] a9)} 
+Test case 23 expected output: 
+[00:00-24:00]
+Test case 24 expected output: 
+[03:00-24:00]
+Test case 25 expected output: 
+[00:00-03:00]
+Test case 26 expected output: 
+[00:00-22:00]
+Test case 27 expected output: 
+[22:00-24:00]
+Test case 28 expected output: 
+[00:00-03:00]
+Test case 29 expected output: 
+[03:00-22:00]
+Test case 30 expected output: 
+No common timeslot is found.
+Test case 31 expected output: 
+[00:00-03:00]
+Test case 32 expected output: 
+[03:00-22:00]
+Test case 33 expected output: 
+No common timeslot is found.
+Test case 34 expected output: 
+[00:00-24:00] 
+Test case 35 expected output: 
+[03:00-24:00] 
+Test case 36 expected output: 
+[00:00-03:00] [22:00-24:00] 
+Test case 37 expected output: 
+[00:00-22:00] 
+Test case 38 expected output: 
+[22:00-24:00] 
+Test case 39 expected output: 
+[00:00-03:00] 
+Test case 40 expected output: 
+[03:00-22:00] 
+Test case 41 expected output: 
+No common timeslot is found.
+Test case 42 expected output: 
+[00:00-03:00] [22:00-24:00] 
+Test case 43 expected output: 
+[03:00-22:00] 
+Test case 44 expected output: 
+No common timeslot is found.
+Test case 45 expected output: 
+[00:00-01:00] [05:00-20:00] [21:00-22:00] [23:00-24:00] 
+Test case 46 expected output: 
+[06:00-20:00] [21:00-22:00] [23:00-24:00] 
+Test case 47 expected output: 
+PASSED - Activity's destructor has been called at least 2 times.
+Test case 48 expected output: 
+PASSED - Activity's destructor has been called at least 4 times.
+Test case 49 expected output: 
+PASSED - Activity's destructor has been called at least 3 times.
+Test case 50 expected output: 
+PASSED - Activity's destructor has been called at least 4 times.

@@ -16,25 +16,25 @@ public:
 	//------your code starts from here------
     // Constructor.
     // outputs "Constructing a Shape.".
-    Shape(){
-    	cout << "Constructing a Shape." << endl;
-	};
+    Shape();
+//    	cout << "Constructing a Shape." << endl;
+
 
     // Destructor, should be able to destroy the object according to its dynamic type (i.e. if it is a Circle, should be able to call the destructor of Circle).
     // outputs "Shape destructed."
-    virtual ~Shape(){
-    	cout << "Shape destructed." << endl;
-	};
+    virtual ~Shape();
+//    	cout << "Shape destructed." << endl;
+
 	
     // calculateArea()
     // Pure virtual function. Compute the area of the shape.
     // returns a double value.
-    virtual double calculateArea() = 0;
+    virtual double calculateArea() const = 0;
 	
     // calculatePerimeter()
     // Pure virtual function. Compute the perimeter of the shape.
     // returns a double value.
-    virtual double calculatePerimeter() = 0;
+    virtual double calculatePerimeter() const = 0;
 
     //------your code ends here------
 };

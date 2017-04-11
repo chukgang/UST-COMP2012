@@ -4,14 +4,25 @@
 #include <list>
 #include <iostream>
 #include <algorithm>
+#include <iterator>
 using namespace std;
 
 class StudentList {
 public:
-    StudentList(int num, string nameList[]);
+    StudentList(int num, string nameList[]): nameList(num){
+    	list<string>::iterator itr;
+    	itr = this->nameList.begin();
+    	for(int i = 0; i < num; i++, itr++){
+    		*itr = nameList[i];
+    	}
+    };
 
     bool findStudent(const string& name) const{
-    	return find(nameList.begin(), nameList.end(), name);
+    	if(find(nameList.begin(), nameList.end(), name) != nameList.end()){
+    		return true;
+    	}else{
+    		return false;
+    	}
     };
 
     bool addStudent(const string& name){
@@ -24,25 +35,30 @@ public:
     };
 
     bool deleteStudent(const string& name){
-    	if(findStudent(name) == true){
-    		iterator itr = nameList.begin();
-    		for(int i = 0; i < nameList.size(); i++, itr++){
-    			if(nameList[i] == name){
-    				nameList.erase (itr);
-    			}
-    		}
+    	list<string>::iterator itr;
+    	itr = find(nameList.begin(), nameList.end(), name);
+    	if(itr != nameList.end()){
+    		nameList.erase (itr);
     		return true;
-    	} else{
+    	}else{
     		return false;
     	}
     };
 
-    friend ostream& operator<<(ostream& os, const StudentList& studentList);
+    friend ostream& operator<<(ostream& os, const StudentList& studentList){
+    	list<string>::const_iterator itr = studentList.nameList.begin();
+    	os << "[" << *itr;
+    	itr++;
+    	for(; itr != studentList.nameList.end(); itr++){
+    		os << ", " << *itr;
+    	}
+    	os << "]";
+    	return os;
+    };
 
 private:
     list<string> nameList;
 
 };
-
 
 #endif //LAB7_STL_STUDENTLIST_H

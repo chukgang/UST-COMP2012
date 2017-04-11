@@ -7,9 +7,23 @@ using namespace std;
 
 class RestaurantQueue {
 public:
-    void serveStudent();
-    void addStudent(const string& name);
-    int waitNum() const;
+    void serveStudent(){
+    	if(waitNum() == 0){
+    		cout << "Current queue is empty." << endl;
+    	}else{
+    		cout << nameQueue.front() << " is served." << endl;
+    		nameQueue.pop();
+    	}
+    };
+
+    void addStudent(const string& name){
+    	cout << name << " is get into the queue." << endl;
+    	nameQueue.push(name);
+    }
+
+    int waitNum() const{
+    	return nameQueue.size();
+    };
 
 private:
     queue<string> nameQueue;

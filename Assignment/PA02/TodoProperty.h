@@ -70,8 +70,7 @@ public:
 //	 */
 //	PlayerModel* getOwner() const {return owner;}
 
-
-protected:
+//protected:
 
 //	/**
 //	 * The owner of this property.

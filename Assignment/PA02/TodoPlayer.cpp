@@ -23,7 +23,7 @@
      * Destructor
      */
     TodoPlayerModel::~TodoPlayerModel(){
-
+    	delete [] properties;
     }
 
 //    /**

@@ -10,8 +10,11 @@
 //your code goes here
 
 #include <string>
+#include "TodoPlace.h"
+#include <iostream>
 #include <sstream>
 #include <stdlib.h>
+#include <typeinfo>
 using namespace std;
 
 TodoBoardController::TodoBoardController() : BoardController() {
@@ -34,13 +37,14 @@ TodoBoardController::TodoBoardController() : BoardController() {
 //}
 
 TodoBoardController::~TodoBoardController() {
-	for (int i = 0; i < BOARD_SIZE; i++){
-		delete cells[i];
-	}
-	for (int i = 0; i < NUMBER_PLAYERS; i++){
-		delete players[i];
-	}
+//	for (int i = 0; i < BOARD_SIZE; i++){
+//		delete cells[i];
+//	}
+//	for (int i = 0; i < NUMBER_PLAYERS; i++){
+//		delete players[i];
+//	}
 }
+
 
 void TodoBoardController::run() {
 	int turn = 0;
@@ -58,12 +62,21 @@ void TodoBoardController::run() {
 		thisTurnPlayer->move(x);
 		printBoard();
 		//Did the Player walk pass Place?
-		if(thisTurnPlayer->getPosition() - x < 0){
-			thisTurnPlayer->collect(PLACE_CASH);
-			string s;
-			s = thisTurnPlayer->getName() + " collect fees from " + PLACES[0];
-			this->prompt(s);
+		for(int i = x - 1; i >= 0; i--){
+			int position = (thisTurnPlayer->getPosition() - i + BOARD_SIZE) % BOARD_SIZE;
+			if (typeid(*cells[position]).name() == typeid(TodoPlaceModel).name()){
+				thisTurnPlayer->collect(PLACE_CASH);
+				string s;
+				s = thisTurnPlayer->getName() + " collect fees from " + cells[position]->getName();
+				this->prompt(s);
+			}
 		}
+//		if(thisTurnPlayer->getPosition() - x < 0){
+//			thisTurnPlayer->collect(PLACE_CASH);
+//			string s;
+//			s = thisTurnPlayer->getName() + " collect fees from " + PLACES[0];
+//			this->prompt(s);
+//		}
 		for(int i = 0; i < NUMBER_PLAYERS; i++){
 			if(i == turn){
 				continue;
@@ -83,6 +96,14 @@ void TodoBoardController::run() {
 		turn = (turn + 1) % NUMBER_PLAYERS;
 	}
 	prompt("End of Game");
+	for (int i = 0; i < BOARD_SIZE; i++){
+		delete cells[i];
+	}
+	for (int i = 0; i < NUMBER_PLAYERS; i++){
+		delete players[i];
+	}
+
+	exit(1);
 }
 
 //bool TodoBoardController::checkBankrupt() {

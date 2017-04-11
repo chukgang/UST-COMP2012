@@ -2,6 +2,7 @@
  * Board.cpp
  *
  *  Created on: Feb 27, 2017
+ *  Updated on: Apr 4, 2017 fix issue, checkbankrupt 0 shd be excluded
  *      Author: kevinw
  */
 
@@ -63,7 +64,7 @@ void BoardController::run() {
 
 bool BoardController::checkBankrupt() {
 	for (int i = 0; i < NUMBER_PLAYERS; i++) {
-		if (players[i]->getCash() <= 0)
+		if (players[i]->getCash() < 0)
 			return true;
 	}
 	return false;

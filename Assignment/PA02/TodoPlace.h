@@ -9,17 +9,18 @@
 #ifndef TODOPLACE_H_
 #define TODOPLACE_H_
 
-#include "Property.h"
+#include "Cell.h"
 #include "param.h"
 
 /**
  *  This is a model class that inherits a cell. A place should not be able to be owned.
  *  When a player passes a place, the player will get some cash, according to the rate calculated.
  */
+class CellModel;
 class TodoPlayerModel;
 class TodoBoardController;
 
-class TodoPlaceModel : public PropertyModel {
+class TodoPlaceModel : public CellModel {
 
 public:
 	/**
@@ -40,11 +41,6 @@ public:
 	 * @param board: The board controller.
 	 */
 	virtual void action(PlayerModel* player, const BoardController& board);
-
-	/**
-	 * @return the rate that a player can get.
-	 */
-	virtual int getRate() const;
 
 };
 

@@ -73,5 +73,3 @@ void TodoRestaurantModel::getRestaurantCount() const{
 	this->todoOwner->gainRestaurant();
 }
 
-
-

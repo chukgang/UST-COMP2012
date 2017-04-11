@@ -64,8 +64,10 @@ public:
 //	 */
 //	PlayerModel* getOwner() const {return owner;}
 
+	/**
+	 * Increase the restaurantCount of the owner of this property
+	 */
 	void  getRestaurantCount() const;
-
 
 protected:
 

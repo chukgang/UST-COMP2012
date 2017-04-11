@@ -49,6 +49,9 @@ void TodoPropertyModel::action(PlayerModel* player, const BoardController& board
 			if(player->getCash() >= BUILDING_COST){
 				houses += 1;
 				player->pay(BUILDING_COST);
+				string s;
+				s = player->getName() + " builds a house on " + name;
+				board.prompt(s);
 			}
 		}
 	}else{

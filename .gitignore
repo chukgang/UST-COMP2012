@@ -51,6 +51,4 @@ local.properties
 # User defined
 *.o
 *.exe
-*.lib
-*.dll
 *.project

@@ -13,9 +13,9 @@
 /* code here */
 
 #include "Property.h"
-#include "TodoPlayer.h"
-#include "TodoBoard.h"
 #include "param.h"
+#include "Player.h"
+#include "Board.h"
 
 #include <string.h>
 #include <sstream>

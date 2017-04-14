@@ -47,7 +47,7 @@ void TodoBoardController::init() {
 		if (i == 0)
 			cells[i] = new TodoPlaceModel(PLACES[i], WHITE);
 		else if (i % 5 == 4)
-			cells[i] = new TodoRestaurantModel(PLACES[i], 3000, GREEN);
+			cells[i] = new TodoRestaurantModel(PLACES[i], 3000, WHITE);
 		else
 			cells[i] = new TodoPropertyModel(PLACES[i], COSTS[i], WHITE);
 	}

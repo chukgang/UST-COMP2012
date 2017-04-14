@@ -75,8 +75,18 @@ void TodoBoardController::run()
 		this->prompt("End turn for " + thisTurnPlayer->getName());
 		turn = (turn + 1) % NUMBER_PLAYERS;
 	}
-	this->prompt("End of Game");
+	PlayerModel* bankrupt;
+	for (int i = 0; i != NUMBER_PLAYERS; i++)
+	{
+		if (this->players[i]->getCash() < 0)
+		{
+			bankrupt = this->players[i];
+		}
+	}
 	this->printBoard();
+	this->view.displayPlayer(bankrupt);
+	this->prompt(bankrupt->getName() + " has gone bankrupt");
+	this->prompt("End of Game");
 	exit(0);
 }
 

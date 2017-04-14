@@ -16,6 +16,11 @@ TodoBoardController::TodoBoardController()
 
 }
 
+TodoBoardController::~TodoBoardController()
+{
+
+}
+
 void TodoBoardController::run()
 {
 	int turn = 0;

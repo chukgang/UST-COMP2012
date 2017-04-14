@@ -21,6 +21,7 @@ class TodoBoardController: public BoardController
 {
 	public:
 		TodoBoardController();
+		~TodoBoardController();
 		void init();
 		void run();
 };

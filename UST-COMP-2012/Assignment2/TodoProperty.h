@@ -12,7 +12,7 @@
 
 /* code here */
 
-#include "TodoPlace.h"
+#include "Property.h"
 #include "TodoPlayer.h"
 #include "TodoBoard.h"
 #include "param.h"

@@ -37,6 +37,7 @@ void TodoPropertyModel::action(PlayerModel* player, const BoardController& board
 			if (player->getCash() >= this->price)
 			{
 				player->gainProperty(this);
+				this->owner = player;
 			}
 			else
 			{
@@ -54,12 +55,16 @@ void TodoPropertyModel::action(PlayerModel* player, const BoardController& board
 		{
 			player->pay(BUILDING_COST);
 			this->houses++;
+			board.prompt("You built a house");
 		}
 	}
 	else
 	{
 		player->pay(this->getRate());
 		this->owner->collect(this->getRate());
+		stringstream msg;
+		msg << "you paid rent $" << this->getRate() << " to " << this->owner->getName() << "\n";
+		board.prompt(msg.str());
 	}
 }
 

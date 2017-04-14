@@ -5,13 +5,17 @@
 //You need to submit this file
 //You need to modify this file
 //your code goes here
-
 /* code here */
 
 #include "TodoRestaurant.h"
 
 TodoRestaurantModel::TodoRestaurantModel(const string name, int price, Color color)
 		: TodoPropertyModel(name, price, color)
+{
+
+}
+
+TodoRestaurantModel::~TodoRestaurantModel()
 {
 
 }
@@ -23,7 +27,8 @@ void TodoRestaurantModel::action(PlayerModel* player, const BoardController& boa
 		int option;
 		stringstream s;
 		s << "Do you want to buy " << name << "?";
-		const string options[2] = {"Yes", "No"};
+		const string options[2] =
+		{ "Yes", "No" };
 
 		option = board.requestInput(s.str(), options, 2);
 		if (option == 0)
@@ -32,6 +37,7 @@ void TodoRestaurantModel::action(PlayerModel* player, const BoardController& boa
 			if (player->getCash() >= this->price)
 			{
 				player->gainProperty(this);
+				this->owner = player;
 			}
 			else
 			{

@@ -32,12 +32,9 @@ void TodoPlayerModel::gainProperty(PropertyModel* pm)
 
 bool TodoPlayerModel::isOwning(PropertyModel* pm) const
 {
-	for (int i = 0; i != this->propertyCount; i++)
+	if (pm->getOwner() == this)
 	{
-		if (this->properties[i] == pm)
-		{
-			return true;
-		}
+		return true;
 	}
 	return false;
 }

@@ -24,6 +24,7 @@ class TodoRestaurantModel: public TodoPropertyModel
 {
 	public:
 		TodoRestaurantModel(const string name, int price, Color color);
+		~TodoRestaurantModel();
 		void action(PlayerModel* player, const BoardController& board);
 		int getRate() const;
 };

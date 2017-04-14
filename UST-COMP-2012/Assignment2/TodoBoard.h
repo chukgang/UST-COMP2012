@@ -16,6 +16,7 @@
 #include "param.h"
 
 #include <sstream>
+#include <stdlib.h>
 
 class TodoBoardController: public BoardController
 {

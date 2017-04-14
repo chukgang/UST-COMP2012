@@ -29,24 +29,23 @@ void TodoPropertyModel::action(PlayerModel* player, const BoardController& board
 		stringstream s;
 		s << "Do you want to buy " << name << "?";
 		const string options[2] = {"Yes", "No"};
-
 		option = board.requestInput(s.str(), options, 2);
 		if (option == 0)
 		{
-			board.prompt("You say yes");
 			if (player->getCash() >= this->price)
 			{
+				player->pay(this->price);
 				player->gainProperty(this);
+				stringstream msg;
+				msg << "You paid $" << this->price << " for buying " << this->name;
+				board.prompt(msg.str());
 				this->owner = player;
+				this->color = player->getColor();
 			}
 			else
 			{
-				board.prompt("Unsuccessful");
+				board.prompt("Not enough money");
 			}
-		}
-		else
-		{
-			board.prompt("You say no");
 		}
 	}
 	else if (this->owner == player)

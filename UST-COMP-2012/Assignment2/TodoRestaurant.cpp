@@ -36,8 +36,10 @@ void TodoRestaurantModel::action(PlayerModel* player, const BoardController& boa
 			board.prompt("You say yes");
 			if (player->getCash() >= this->price)
 			{
+				player->pay(this->price);
 				player->gainProperty(this);
 				this->owner = player;
+				this->color = player->getColor();
 			}
 			else
 			{

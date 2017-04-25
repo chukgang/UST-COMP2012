@@ -19,19 +19,24 @@ class Sum{
     
     //TO-DO:Implement the member functions below
 	
-    void operator()(const T& i){
-    	sum = sum + i;
-    };
+    void operator()(const T& i);
 
-    T getSum() const{
-    	return sum;
-    }
+    T getSum() const;
 	
     friend ostream& operator<<(ostream& os, const Sum& s){
-    	os << s.sum;
+    	os << s.getSum();
     	return os;
-    };
+	};
 };
 
 //TODO: write your code here
+	template <typename T>
+    void Sum<T>::operator()(const T& i){
+    	sum = sum + i;
+    }
+
+	template <typename T>
+    T Sum<T>::getSum() const{
+    	return sum;
+    }
 #endif /* SUM_H */

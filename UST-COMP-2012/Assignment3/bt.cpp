@@ -26,6 +26,13 @@ template<typename T, typename K>
 void BT<T,K>::iterator_init()
 {
     //write your codes here
+	/* code here */
+	while (!this->istack.empty())
+	{
+		this->istack.pop();
+	}
+	this->current = this->root;
+	/* code end */
 }
 
 /* TODO:
@@ -35,6 +42,13 @@ template<typename T, typename K>
 bool BT<T,K>::iterator_end()
 {
      //write your codes here
+	/* code here */
+	if (!this->left_subtree()->is_empty() || !this->right_subtree()->is_empty())
+	{
+		return false;
+	}
+	return true;
+	/* code end */
 }
 
 /* TODO:

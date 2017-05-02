@@ -21,7 +21,8 @@ template <typename T, typename K> class BT
         BT* left;
         BT* right;
         node(const T& x, const K& k, int h = 0, BT* L = 0, BT* R = 0)
-          : value(x), key(k), bt_height(h), left(L), right(L) { };
+          : value(x), key(k), bt_height(h), left(L), right(L) { }
+        ~node() { delete left; delete right; }
     };
 
     node* root;
@@ -60,17 +61,18 @@ template <typename T, typename K> class BT
 
     /* Search for an item x with key k from the tree
      * Return: A pointer to the subtree whose root node contains the item
-     *         if found, otherwise a NULL pointer.
+    *          if found, otherwise a NULL pointer.
      */
     virtual BT* search(const K& k) = 0;
 
     /* Print in a readable tree format
-     * For each node only print its key
-     * It is provided in bst.h, you don't need to implement this function
+     * For each node you only need to print its key
+     * You don't need to be exactly the same with sample output
+     * The output format of this function will not be tested
      */
     virtual void print(int depth = 0) const = 0;
 
-    /* 
+    /*
      * The following three functions are used by the iterator of BT
      */
     virtual void iterator_init();

@@ -35,7 +35,7 @@ void Student::update_course_history(const map<int, Course>& course_db, int code)
 
 /* TODO:
  * Print completed courses in ascending order of the course codes
- * Remark: You should use the BT iterator to go through the course history
+ * Remark: You should use the STL iterator to go through the course history
  *         which is an STL set.
  */
 void Student::print_course_history() const

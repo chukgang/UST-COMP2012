@@ -6,6 +6,7 @@
 #ifndef BT_CPP
 #define BT_CPP
 
+
 /* TODO
  * Goal: Do preorder traversal on the tree
  * Remark: print both value and key fields of each node
@@ -21,7 +22,7 @@ void BT<T,K>::preorder_traversal() const{
 template<typename T, typename K>
 void BT<T,K>::iterator_init(){
     //write your codes here
-	while (!istack.empty()){
+	while(!istack.empty()){
 		istack.pop();
 	}
 	current = root;
@@ -33,10 +34,28 @@ void BT<T,K>::iterator_init(){
 template<typename T, typename K>
 bool BT<T,K>::iterator_end(){
      //write your codes here
-	if(this->left_subtree().is_empty() && this->right_subtree().is_empty()){
-		return true;
+	if(!this->left_subtree().is_empty() && !this->right_subtree().is_empty()){
+		if(this->left_subtree().node.key > this->node.key && this->left_subtree().node.key > this->right_subtree().node.key){
+			return false;
+		}else if(this->right_subtree().node.key > this->node.key && this->right_subtree().node.key > this->left_subtree().node.key){
+			return false;
+		}else{
+			return true;
+		}
+	}else if(this->left_subtree().is_empty() && !this->right_subtree().is_empty()){
+		if(this->right_subtree().node.key > this->node.key){
+			return false;
+		}else{
+			return true;
+		}
+	}else if(!this->left_subtree().is_empty() && this->right_subtree().is_empty()){
+		if(this->left_subtree().node.key > this->node.key){
+			return false;
+		}else{
+			return true;
+		}
 	}else{
-		return false;
+		return true;
 	}
 }
 
@@ -46,28 +65,28 @@ bool BT<T,K>::iterator_end(){
 template<typename T, typename K>
 T& BT<T,K>::iterator_next(){
     //write your codes here
-	if(iterator_end()){
-		return this->node.value;
-	}else if(!this->left_subtree().is_empty() && this->right_subtree().is_empty()){
-		if(this->left_subtree().iterator_next() < this->node.value){
+	if(!this->left_subtree().is_empty() && !this->right_subtree().is_empty()){
+		if(this->left_subtree().node.key > this->node.key && this->left_subtree().node.key > this->right_subtree().node.key){
 			return this->left_subtree().node.value;
+		}else if(this->right_subtree().node.key > this->node.key && this->right_subtree().node.key > this->left_subtree().node.key){
+			return this->right_subtree().node.value;
 		}else{
 			return this->node.value;
 		}
 	}else if(this->left_subtree().is_empty() && !this->right_subtree().is_empty()){
-		if(this->right_subtree().iterator_next() < this->node.value){
+		if(this->right_subtree().node.key > this->node.key){
 			return this->right_subtree().node.value;
+		}else{
+			return this->node.value;
+		}
+	}else if(!this->left_subtree().is_empty() && this->right_subtree().is_empty()){
+		if(this->left_subtree().node.key > this->node.key){
+			return this->left_subtree().node.value;
 		}else{
 			return this->node.value;
 		}
 	}else{
-		if(this->left_subtree().iterator_next() < this->node.value && this->left_subtree().is_empty() < this->right_subtree().iterator_next()){
-			return this->left_subtree().node.value;
-		}else if(this->right_subtree().iterator_next() < this->node.value && this->right_subtree().is_empty() < this->left_subtree().iterator_next()){
-			return this->right_subtree().node.value;
-		}else{
-			return this->node.value;
-		}
+		return this->node.value;
 	}
 }
 

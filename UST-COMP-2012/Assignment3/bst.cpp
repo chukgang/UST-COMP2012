@@ -104,7 +104,27 @@ void BST<T,K>::remove(const K& k)
 {    
     //write your codes here
 	/* code here */
+	node* parent = NULL;
+	node* tar = this->root;
+	node* rep = NULL;
+	while (tar != NULL)
+	{
+		if (tar->key == k)
+		{
+			if (tar->left != NULL)
+			{
 
+			}
+			else if (tar->right != NULL)
+			{
+
+			}
+			else
+			{
+
+			}
+		}
+	}
 	/* code end */
 }
 

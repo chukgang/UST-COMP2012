@@ -43,11 +43,7 @@ bool BT<T,K>::iterator_end()
 {
      //write your codes here
 	/* code here */
-	if (!this->left_subtree()->is_empty() || !this->right_subtree()->is_empty())
-	{
-		return false;
-	}
-	return true;
+	return (this->current == NULL);
 	/* code end */
 }
 
@@ -58,6 +54,38 @@ template<typename T, typename K>
 T& BT<T,K>::iterator_next()
 {
     //write your codes here
+	/* code here */
+	node* tar = NULL;
+	if (this->istack.empty())
+	{
+		this->istack.push(this->root);
+		while (this->current != NULL)
+		{
+			this->istack.push(this->current);
+			this->current = this->current->left;
+		}
+	}
+	tar = this->istack.top();
+	this->istack.pop();
+	if (tar->right != NULL)
+	{
+		this->current = tar->right;
+		while (this->current != NULL)
+		{
+			this->istack.push(this->current);
+			this->current = this->current->left;
+		}
+	}
+	if (!this->istack.empty())
+	{
+		this->current = this->istack.top();
+	}
+	else
+	{
+		this->current = NULL;
+	}
+	return tar->value;
+	/* code end */
 }
 
 #endif /* BT_CPP */

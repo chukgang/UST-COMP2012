@@ -80,6 +80,7 @@ private:
 };
 
 // Print the BST out, the output is rotated -90 degrees.
+template<typename T1, typename T2>
 void BinarySearchTree<T1, T2>::printTree(typename BinarySearchTree<T1, T2>::BinaryNode *t, int depth) const {
     if (t == NULL)
         return;
@@ -91,20 +92,79 @@ void BinarySearchTree<T1, T2>::printTree(typename BinarySearchTree<T1, T2>::Bina
 }
 
 template<typename T1, typename T2>
-void BinarySearchTree<T1, T2>::insert(const T1 &x, const T2 &y, BinarySearchTree<T1, T2>::BinaryNode *&t);
+void BinarySearchTree<T1, T2>::insert(const T1 &x, const T2 &y, BinarySearchTree<T1, T2>::BinaryNode *&t)
+{
+	if (t == NULL)
+	{
+		t = new BinarySearchTree<T1, T2>::BinaryNode(x, y);
+	}
+	if (t->x > x || (t->x == x && t->y > y))
+	{
+		if (t->left == NULL)
+		{
+			t->left = new BinarySearchTree<T1, T2>::BinaryNode(x, y);
+			return;
+		}
+		this->insert(x, y, t->left);
+	}
+	else if (t->x < x || (t->x == x && t->y < y))
+	{
+		if (t->right == NULL)
+		{
+			t->right = new BinarySearchTree<T1, T2>::BinaryNode(x, y);
+			return;
+		}
+		this->insert(x, y, t->right);
+	}
+}
 
 //  Check if the BST contains the value (x,y).
 template<typename T1, typename T2>
-bool BinarySearchTree<T1, T2>::contains(const T1 &x, const T2 &y, BinarySearchTree<T1, T2>::BinaryNode *t) const;
-
+bool BinarySearchTree<T1, T2>::contains(const T1 &x, const T2 &y, BinarySearchTree<T1, T2>::BinaryNode *t) const
+{
+	if (t == NULL)
+	{
+		return false;
+	}
+	if (t->x > x || (t->x == x && t->y > y))
+	{
+		return this->contains(x, y, t->left);
+	}
+	else if (t->x < x || (t->x == x && t->y < y))
+	{
+		return this->contains(x, y, t->right);
+	}
+	return true;
+}
 
 // Make Empty
 template<typename T1, typename T2>
-void BinarySearchTree<T1, T2>::makeEmpty(BinarySearchTree<T1, T2>::BinaryNode *t);
+void BinarySearchTree<T1, T2>::makeEmpty(BinarySearchTree<T1, T2>::BinaryNode *t)
+{
+	if (t != NULL)
+	{
+		this->makeEmpty(t->left);
+		this->makeEmpty(t->right);
+		delete t;
+	}
+}
 
 // Print minimum key
 // If the tree is empty, you should print "Empty tree"
 template<typename T1, typename T2>
-void BinarySearchTree<T1, T2>::printMin() const;
+void BinarySearchTree<T1, T2>::printMin() const
+{
+	BinaryNode* tar = this->root;
+	if (tar == NULL)
+	{
+		cout << "Empty tree\n";
+		return;
+	}
+	while (tar->left != NULL)
+	{
+		tar = tar->left;
+	}
+	this->printTree(tar, 1);
+}
 
 #endif //LAB9_BINARYSEARCHTREE_H

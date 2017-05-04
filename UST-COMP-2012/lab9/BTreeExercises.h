@@ -24,4 +24,6 @@ BtreeNode<T> *mirror(BtreeNode<T> *root);
 template<class T>
 bool isComplete(BtreeNode<T> *root);
 
+#include "BTreeExercises.cpp"
+
 #endif //LAB9_BTREEEXERCISES_H

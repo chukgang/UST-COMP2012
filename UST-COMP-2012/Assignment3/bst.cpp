@@ -57,6 +57,13 @@ template<typename T, typename K>
 void BST<T,K>::iterator_init()
 {
     //write your codes here
+	/* code here */
+	while (!this->istack.empty())
+	{
+		this->istack.pop();
+	}
+	this->current = this->root;
+	/* code end */
 }
 
 
@@ -77,6 +84,28 @@ template<typename T, typename K>
 T& BST<T,K>::iterator_next()
 {
     //write your codes here
+	/* code here */
+	if (this->istack.empty() && this->current == this->root)
+	{
+		node* tar = this->root;
+		while (tar != NULL)
+		{
+			this->istack.push(tar);
+			tar = tar->left;
+		}
+		this->current = this->istack.top();
+	}
+	if (!this->istack.empty())
+	{
+		T val = this->current->value;
+		this->istack.pop();
+		if (this->current->right != NULL)
+		{
+			this->istack.push(this->current->right);
+		}
+		this->current = this->istack.top();
+	}
+	/* code end */
 }
 
 

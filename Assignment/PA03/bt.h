@@ -21,7 +21,7 @@ template <typename T, typename K> class BT
         BT* left;
         BT* right;
         node(const T& x, const K& k, int h = 0, BT* L = 0, BT* R = 0)
-          : value(x), key(k), bt_height(h), left(L), right(L) { }
+          : value(x), key(k), bt_height(h), left(L), right(R) { }
         ~node() { delete left; delete right; }
     };
 
@@ -75,9 +75,9 @@ template <typename T, typename K> class BT
     /*
      * The following three functions are used by the iterator of BT
      */
-    virtual void iterator_init();
-    virtual bool iterator_end();
-    virtual T& iterator_next();
+    virtual void iterator_init() = 0;
+    virtual bool iterator_end() = 0;
+    virtual T& iterator_next() = 0;
 };
 
 #include "bt.cpp"

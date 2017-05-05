@@ -17,6 +17,10 @@ template <typename T, typename K> class BST : public BT<T,K>
     virtual void remove(const K& k);                //TODO
     virtual void print(int depth = 0) const;
 
+    virtual void iterator_init();                   //TODO
+    virtual bool iterator_end();                    //TODO
+    virtual T& iterator_next();                     //TODO
+
     typedef typename BT<T,K>::node bt_node;
 };
 

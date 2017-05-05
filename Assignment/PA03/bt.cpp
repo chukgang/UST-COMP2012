@@ -5,7 +5,9 @@
 
 #ifndef BT_CPP
 #define BT_CPP
-
+#include <iostream>
+#include "bt.h"
+using namespace std;
 
 /* TODO
  * Goal: Do preorder traversal on the tree
@@ -14,52 +16,18 @@
 template <typename T, typename K>
 void BT<T,K>::preorder_traversal() const{
     //write your codes here
-}
-
-
-
-/* TODO:
- * Clear the node stack and set current pointer to the root 
- */
-template<typename T, typename K>
-void BT<T,K>::iterator_init(){
-    //write your codes here
-	while(!istack.empty()){
-		istack.pop();
-	}
-	current = root;
-}
-
-/* TODO:
- * Check whether the next smallest node exists 
- */
-template<typename T, typename K>
-bool BT<T,K>::iterator_end(){
-     //write your codes here
-	if(current == root && !istack.empty && istack.top() == root){
-		return true;
-	}else{
-		return false;
-	}
-}
-
-/* TODO:
- * Return the value of next smallest node from the tree 
- */
-template<typename T, typename K>
-T& BT<T,K>::iterator_next()
-{
-    //write your codes here
-	if(istack.empty()){
-		while(current->left != 0){
-			istack.push(current);
-			current = current->left;
+	stack<typename T, typename K> preorderTraversal;
+	preorderTraversal.push(root);
+	while(!preorderTraversal.empty()){
+		cout << preorderTraversal.top()->value << " " << preorderTraversal.top()->key << endl;
+		if(preorderTraversal.top()->right_subtree() != NULL){
+			preorderTraversal.push(preorderTraversal.top()->right_subtree());
 		}
-		current = istack.top();
-		istack.pop();
-		return current->left->value;
+		if(preorderTraversal.top()->left_subtree() != NULL){
+			preorderTraversal.push(preorderTraversal.top()->left_subtree());
+		}
 	}
-
 }
+
 
 #endif /* BT_CPP */

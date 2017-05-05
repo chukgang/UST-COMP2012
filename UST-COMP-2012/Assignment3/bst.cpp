@@ -16,6 +16,25 @@ template <typename T, typename K>
 BT<T,K>* BST<T,K>::search(const K& k)
 {
     //write your codes here
+	/* code here */
+	if (this->root->key == k)
+	{
+		return this;
+	}
+	if (this-root->key > k)
+	{
+		if (this->left_subtree() != NULL)
+		{
+			return (dynamic_cast<BST<T, K>*>(this->left_subtree())).search(k);
+		}
+		return NULL;
+	}
+	if (this->right_subtree() != NULL)
+	{
+		return (dynamic_cast<BST<T, K>*>(this->right_subtree())).search(k);
+	}
+	return NULL;
+	/* code here */
 }
 
 
@@ -27,8 +46,14 @@ template <typename T, typename K>
 BT<T,K>* BST<T,K>::find_min()
 {
     //write your codes here
+	/* code here */
+	if (this->left_subtree() == NULL)
+	{
+		return this;
+	}
+	return (dynamic_cast<BST<T, K>*>(this->left_subtree())).find_min();
+	/* code end */
 }
-
 
 /* TODO
  * Goal: To insert an item x with key k to a BST tree 
@@ -74,6 +99,9 @@ template<typename T, typename K>
 bool BST<T,K>::iterator_end()
 {
     //write your codes here
+	/* code here */
+	return (this->current == NULL);
+	/* code end */
 }
 
 
@@ -87,11 +115,10 @@ T& BST<T,K>::iterator_next()
 	/* code here */
 	if (this->istack.empty() && this->current == this->root)
 	{
-		node* tar = this->root;
-		while (tar != NULL)
+		while (this->current != NULL)
 		{
-			this->istack.push(tar);
-			tar = tar->left;
+			this->istack.push(this->current);
+			this->current = this->current->left;
 		}
 		this->current = this->istack.top();
 	}
@@ -101,9 +128,22 @@ T& BST<T,K>::iterator_next()
 		this->istack.pop();
 		if (this->current->right != NULL)
 		{
-			this->istack.push(this->current->right);
+			this->current = this->current->right;
+			while (this->current != NULL)
+			{
+				this->istack.push(this->current);
+				this->current = this->current->left;
+			}
 		}
-		this->current = this->istack.top();
+		if (!this->istack.empty())
+		{
+			this->current = this->istack.top();
+		}
+		else
+		{
+			this->current = NULL;
+		}
+		return val;
 	}
 	/* code end */
 }

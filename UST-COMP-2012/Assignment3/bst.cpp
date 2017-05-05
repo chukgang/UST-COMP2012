@@ -16,25 +16,6 @@ template <typename T, typename K>
 BT<T,K>* BST<T,K>::search(const K& k)
 {
     //write your codes here
-	/* code here */
-	node* tar = this->root;
-	while (tar != NULL)
-	{
-		if (tar->key == k)
-		{
-			return tar;
-		}
-		if (tar->key < k)
-		{
-			tar = tar->left;
-		}
-		else
-		{
-			tar = tar->right;
-		}
-	}
-	return NULL;
-	/* code end */
 }
 
 
@@ -46,14 +27,6 @@ template <typename T, typename K>
 BT<T,K>* BST<T,K>::find_min()
 {
     //write your codes here
-	/* code here */
-	node* tar = this->root;
-	while (tar->left != NULL)
-	{
-		tar = tar->left;
-	}
-	return tar;
-	/* code end */
 }
 
 
@@ -64,35 +37,6 @@ template <typename T, typename K>
 void BST<T,K>::insert(const T& x, const K& k)
 {
     //write your codes here
-	/* code here */
-	node* tar = this->root;
-	while (true)
-	{
-		if (tar->key == k)
-		{
-			return;
-		}
-		if (tar->key < k)
-		{
-			if (tar->left == NULL)
-			{
-				tar->left = new node(x, k);
-				return;
-			}
-			tar = tar->left;
-		}
-		else
-		{
-			if (tar->right == NULL)
-			{
-				tar->right = new node(x, k);
-				return;
-			}
-			tar = tar->right;
-		}
-	}
-	return NULL;
-	/* code end */
 }
 
 
@@ -103,29 +47,37 @@ template <typename T, typename K>
 void BST<T,K>::remove(const K& k)
 {    
     //write your codes here
-	/* code here */
-	node* parent = NULL;
-	node* tar = this->root;
-	node* rep = NULL;
-	while (tar != NULL)
-	{
-		if (tar->key == k)
-		{
-			if (tar->left != NULL)
-			{
-
-			}
-			else if (tar->right != NULL)
-			{
-
-			}
-			else
-			{
-
-			}
-		}
-	}
-	/* code end */
 }
+
+
+/* TODO
+ * Goal: Clear the node stack and set current pointer to the root 
+ */
+template<typename T, typename K>
+void BST<T,K>::iterator_init()
+{
+    //write your codes here
+}
+
+
+/* TODO
+ * Goal: Check whether the next smallest node exists 
+ */
+template<typename T, typename K>
+bool BST<T,K>::iterator_end()
+{
+    //write your codes here
+}
+
+
+/* TODO
+ * Goal: Return the value of next smallest node from the tree 
+ */
+template<typename T, typename K>
+T& BST<T,K>::iterator_next()
+{
+    //write your codes here
+}
+
 
 #endif /* BST_CPP */

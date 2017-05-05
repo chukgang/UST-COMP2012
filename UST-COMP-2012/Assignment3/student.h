@@ -33,6 +33,8 @@ class Student
   public:
     /* TODO: Constructor */
     Student(const string& id, const int* history, int num, CP_TYPE dbtype);
+   
+    ~Student() { delete course_plan; }  // Destructor
 
     /* TODO: Add a course into course_history */
     void update_course_history(const map<int, Course>& course_db, int course_code);

@@ -15,7 +15,7 @@
 template <typename T, typename K>
 int AVL<T,K>::bfactor() const
 {
-    //write your codes here
+	//write your codes here
 }
 
 
@@ -25,7 +25,11 @@ int AVL<T,K>::bfactor() const
 template <typename T, typename K>
 void AVL<T,K>::fix_height() const
 {
-    //write your codes here
+    if (this->left_subtree() == NULL && this->right_subtree() == NULL)
+    {
+    	this->root->bt_height = 0;
+    }
+
 }
 
 

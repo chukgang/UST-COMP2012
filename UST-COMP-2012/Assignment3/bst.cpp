@@ -15,26 +15,23 @@
 template <typename T, typename K>
 BT<T,K>* BST<T,K>::search(const K& k)
 {
-    //write your codes here
-	/* code here */
 	if (this->root->key == k)
 	{
 		return this;
 	}
-	if (this-root->key > k)
+	if (this->root->key > k)
 	{
 		if (this->left_subtree() != NULL)
 		{
-			return (dynamic_cast<BST<T, K>*>(this->left_subtree())).search(k);
+			return (dynamic_cast<BST<T, K>*>(this->left_subtree()))->search(k);
 		}
 		return NULL;
 	}
 	if (this->right_subtree() != NULL)
 	{
-		return (dynamic_cast<BST<T, K>*>(this->right_subtree())).search(k);
+		return (dynamic_cast<BST<T, K>*>(this->right_subtree()))->search(k);
 	}
 	return NULL;
-	/* code here */
 }
 
 
@@ -45,14 +42,11 @@ BT<T,K>* BST<T,K>::search(const K& k)
 template <typename T, typename K>
 BT<T,K>* BST<T,K>::find_min()
 {
-    //write your codes here
-	/* code here */
 	if (this->left_subtree() == NULL)
 	{
 		return this;
 	}
-	return (dynamic_cast<BST<T, K>*>(this->left_subtree())).find_min();
-	/* code end */
+	return (dynamic_cast<BST<T, K>*>(this->left_subtree()))->find_min();
 }
 
 /* TODO
@@ -61,7 +55,33 @@ BT<T,K>* BST<T,K>::find_min()
 template <typename T, typename K>
 void BST<T,K>::insert(const T& x, const K& k)
 {
-    //write your codes here
+	if (this->root == NULL)
+	{
+		this->root = new bt_node(x, k);
+		return;
+	}
+	if (this->root->key > k)
+	{
+		if (this->left_subtree() == NULL)
+		{
+			this->left_subtree() = new BST<T, K>();
+			(dynamic_cast<BST<T, K>*>(this->left_subtree()))->root = new bt_node(x, k);
+			return;
+		}
+		(dynamic_cast<BST<T, K>*>(this->left_subtree()))->insert(x, k);
+		return;
+	}
+	if (this->root->key < k)
+	{
+		if (this->right_subtree() == NULL)
+		{
+			this->right_subtree() = new BST<T, K>();
+			(dynamic_cast<BST<T, K>*>(this->right_subtree()))->root = new bt_node(x, k);
+			return;
+		}
+		(dynamic_cast<BST<T, K>*>(this->right_subtree()))->insert(x, k);
+	}
+	return;
 }
 
 
@@ -70,8 +90,8 @@ void BST<T,K>::insert(const T& x, const K& k)
  */
 template <typename T, typename K>
 void BST<T,K>::remove(const K& k)
-{    
-    //write your codes here
+{
+	//write your codes here
 }
 
 
@@ -81,14 +101,11 @@ void BST<T,K>::remove(const K& k)
 template<typename T, typename K>
 void BST<T,K>::iterator_init()
 {
-    //write your codes here
-	/* code here */
 	while (!this->istack.empty())
 	{
 		this->istack.pop();
 	}
 	this->current = this->root;
-	/* code end */
 }
 
 
@@ -98,10 +115,7 @@ void BST<T,K>::iterator_init()
 template<typename T, typename K>
 bool BST<T,K>::iterator_end()
 {
-    //write your codes here
-	/* code here */
 	return (this->current == NULL);
-	/* code end */
 }
 
 
@@ -111,28 +125,27 @@ bool BST<T,K>::iterator_end()
 template<typename T, typename K>
 T& BST<T,K>::iterator_next()
 {
-    //write your codes here
-	/* code here */
 	if (this->istack.empty() && this->current == this->root)
 	{
-		while (this->current != NULL)
+		BST<T, K>* tar = this;
+		while (tar != NULL)
 		{
-			this->istack.push(this->current);
-			this->current = this->current->left;
+			this->istack.push(tar->root);
+			tar = dynamic_cast<BST<T, K>*>(tar->left_subtree());
 		}
 		this->current = this->istack.top();
 	}
 	if (!this->istack.empty())
 	{
-		T val = this->current->value;
+		bt_node* ret = this->istack.top();
 		this->istack.pop();
-		if (this->current->right != NULL)
+		if (ret->right != NULL)
 		{
-			this->current = this->current->right;
-			while (this->current != NULL)
+			BST<T, K>* tar = dynamic_cast<BST<T, K>*>(ret->right);
+			while (tar != NULL)
 			{
-				this->istack.push(this->current);
-				this->current = this->current->left;
+				this->istack.push(tar->root);
+				tar = dynamic_cast<BST<T, K>*>(tar->left_subtree());
 			}
 		}
 		if (!this->istack.empty())
@@ -143,9 +156,8 @@ T& BST<T,K>::iterator_next()
 		{
 			this->current = NULL;
 		}
-		return val;
+		return ret->value;
 	}
-	/* code end */
 }
 
 

@@ -10,23 +10,21 @@
  * - num is the length of this array
  * When cp_type = AVL_CP, store course_plan as an AVL tree; otherwise store course_plan as a BST
  */
-Student::Student(const string& id, const int* history, int num, CP_TYPE cp_type)
-{
+Student::Student(const string& id, const int* history, int num, CP_TYPE cp_type) : id(id), course_history(history*),  course_plan(AVL<Course, int>()){
 
 }
-
 
 /* TODO: Add a course into course_history
  *   course_db is a database containing all valid courses, stored in an STL map
  *   The key values used in the STL map are the course code
  */
-void Student::update_course_history(const map<int, Course>& course_db, int code)
-{
+void Student::update_course_history(const map<int, Course>& course_db, int code){
     //Write your codes here.
-
     //Check whether the course code is valid, i.e., it exists in the course_db.
-
-    //If it is valid, add it to course_history.
+    if(course_db.find(code) != course_db.end()){
+    	//If it is valid, add it to course_history.
+    	this->course_history.insert(code);
+    }
 
     //Otherwise print an appropriate message, please refer to the sample output.
 

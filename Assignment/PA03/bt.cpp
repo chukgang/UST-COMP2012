@@ -16,15 +16,15 @@ using namespace std;
 template <typename T, typename K>
 void BT<T,K>::preorder_traversal() const{
     //write your codes here
-	stack<typename T, typename K> preorderTraversal;
+	stack<node*> preorderTraversal;
 	preorderTraversal.push(root);
 	while(!preorderTraversal.empty()){
 		cout << preorderTraversal.top()->value << " " << preorderTraversal.top()->key << endl;
-		if(preorderTraversal.top()->right_subtree() != NULL){
-			preorderTraversal.push(preorderTraversal.top()->right_subtree());
+		if(preorderTraversal.top()->right != NULL){
+			preorderTraversal.push(preorderTraversal.top()->right->root);
 		}
-		if(preorderTraversal.top()->left_subtree() != NULL){
-			preorderTraversal.push(preorderTraversal.top()->left_subtree());
+		if(preorderTraversal.top()->left != NULL){
+			preorderTraversal.push(preorderTraversal.top()->left->root);
 		}
 	}
 }

@@ -3,14 +3,14 @@
  */
 
 #include "course.h"
-
+#include "timeslot.h"
 /* TODO
  * Constructor: The STL vector, pre_requisites, is initialized from an int array
  *   prerequisites of size pre_num
  */
-Course::Course(int code, weekday day1, weekday day2, int stime, int etime,
-               int* prerequisites, int pre_num)
-{ }
+Course::Course(int code, weekday day1, weekday day2, int stime, int etime, int* prerequisites, int pre_num) : lecture_time(day1, day2, stime, etime), course_code(code){
+
+};
 
 // Accessors
 int Course::get_code() const

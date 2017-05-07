@@ -14,6 +14,19 @@ using namespace std;
 
 int main()
 {
+	BST<int, int> bst;
+	bst.insert(1, 100);
+	bst.insert(2, 200);
+	bst.insert(3, 300);
+	bst.insert(-2, -200);
+	bst.insert(-1, -100);
+	bst.print(0);
+	bst.iterator_init();
+	while (!bst.iterator_end())
+	{
+		cout << bst.iterator_next() << " ";
+	}
+	/*
     // Create some courses, possibly with pre-requisites
     int pre1[] = { };
     Course c1(1001, Wed, Thu, 9, 10, pre1, 0);
@@ -184,6 +197,7 @@ int main()
 
     s1.print_course_plan_tree(); cout << endl;
     s2.print_course_plan_tree(); cout << endl;
+    */
     return 0;
 }
 

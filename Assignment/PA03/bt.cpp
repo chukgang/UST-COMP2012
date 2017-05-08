@@ -18,7 +18,7 @@ void BT<T,K>::preorder_traversal() const{
 	stack<node*> preorderTraversal;
 	preorderTraversal.push(root);
 	while(!preorderTraversal.empty()){
-		cout << preorderTraversal.top()->value << " " << preorderTraversal.top()->key << endl;
+		cout << "Key: " << preorderTraversal.top()->key << "\tValue: " << preorderTraversal.top()->value << endl;
 		if(preorderTraversal.top()->right != NULL){
 			preorderTraversal.push(preorderTraversal.top()->right->root);
 		}

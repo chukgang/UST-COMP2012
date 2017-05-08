@@ -65,26 +65,19 @@ void Student::enroll(const map<int, Course>& course_db, int code){
     //Write your codes here
     //Check whether the course code is valid, if not then print an appropriate message.
 	if(course_db.find(code) != course_db.end()){
-	    //If the course code is valid, further check whether its pre-requisites are all completed.
-		bool allPrerequisitesCompleted = true;
+	    //If the course code is valid, further check whether its pre-requisites are all completed.7
 		bool prerequisitesCompleted = true;
 		Course course = course_db.find(code)->second;
 		for(int i = 0; i < course.get_num_prerequisites(); i++){
-			set<int>::const_iterator enrollIterator = course_history.begin();
-
-			if(course_history.find(course.get_prerequisites(i))){
+			if(course_history.find(course.get_prerequisites(i)) != course_history.end()){
 				prerequisitesCompleted = true;
 			}else{
 				prerequisitesCompleted = false;
-			}
-
-			if(prerequisitesCompleted == false){
-				allPrerequisitesCompleted = false;
 				break;
 			}
 		}
 		//If all pre-requisites are completed, add the course into course_plan, otherwise print an appropriate message.
-		if(allPrerequisitesCompleted == false){
+		if(prerequisitesCompleted == false){
 			cout << "Can't enroll " << code << ". Not all pre-requisites are satisfied yet.";
 		}else{
 			course_plan->insert(course_db.find(code)->second, code);
@@ -99,39 +92,60 @@ void Student::enroll(const map<int, Course>& course_db, int code){
  */
 void Student::drop(const int code){
     //Write your codes here
+	course_plan->remove(code);
 }
 
 
 /* TODO: Select courses with course_code larger than base from course_plan
  * Remark: Print the selected courses in ascending order of the course codes
  */
-void Student::select_by_code(int base)
-{
+void Student::select_by_code(int base){
     cout << "Student ID: " << id << endl;
-
     //Write your codes here
+    course_plan->iterator_init();
+    Course course;
+    while(!course_plan->iterator_end()){
+    	course = course_plan->iterator_next();
+    	if(course.get_code() > base){
+    		cout << course << endl;
+    	}
+    }
 
 }
 
 /* TODO: Select courses that have lectures on day from the course_plan
  * Remark: Print the selected courses in ascending order of the course codes
  */
-void Student::select_by_day(weekday day)
-{
+void Student::select_by_day(weekday day){
     cout << "Student ID: " << id << endl;
-
     //Write your codes here
+    course_plan->iterator_init();
+    Course course;
+    while(!course_plan->iterator_end()){
+    	course = course_plan->iterator_next();
+    	if(course.get_time().match(day)){
+    		cout << course << endl;
+    	}
+    }
 
 }
 
 /* TODO: Check the details of an enrolled course
  * Remark: Print an appropriate message if the course is not in the course plan
  */
-void Student::check_course(int code) const
-{
+void Student::check_course(int code) const{
     //Write your codes here
-
     //Please refer to the sample output for the output message.
+	if(course_plan->search(code)){
+	    course_plan->iterator_init();
+	    Course course;
+	    while(!course_plan->iterator_end()){
+	    	course = course_plan->iterator_next();
+	    	if(course.get_code() == code){
+	    		cout << course << endl;
+	    	}
+	    }
+	}
 
 }
     
@@ -140,19 +154,17 @@ void Student::check_course(int code) const
 /* TODO: Print all courses students plan to take 
  * Remark: Print the courses stored in the BT in preorder format
  */
-void Student::list_course_plan() const
-{
+void Student::list_course_plan() const{
     cout << "Student ID: " << id << endl;
-    
     //Write your codes here
+    course_plan->preorder_traversal();
 
 }
 
 /* Print course_plan in a readable tree format.
  * DON'T MODIFY THIS FUNCTION
  */
-void Student::print_course_plan_tree() const
-{
+void Student::print_course_plan_tree() const{
     cout << "Student ID: " << id << endl;
     course_plan->print();
 }

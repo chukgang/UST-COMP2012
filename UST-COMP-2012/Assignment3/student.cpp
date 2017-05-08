@@ -42,7 +42,7 @@ void Student::update_course_history(const map<int, Course>& course_db, int code)
 	}
 	else
 	{
-		cout << id << ": Fail to update history with an invalid course " << code << "\n";
+		cout << this->id.c_str() << ": Fail to update history with an invalid course " << code << "\n";
 	}
 }
 

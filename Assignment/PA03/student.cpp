@@ -79,7 +79,6 @@ void Student::enroll(const map<int, Course>& course_db, int code){
 		    cout << id << ": Can't enroll " << code << ". Not all pre-requisites are satisfied yet." << endl;
 		}else{
 			course_plan->insert(course_db.find(code)->second, code);
-			course_plan->insert(course, code);
 		}
 	}else{
 		cout << id << ": Fail to enroll an invalid course " << code << endl;

@@ -12,7 +12,21 @@
  */
 Student::Student(const string& id, const int* history, int num, CP_TYPE cp_type)
 {
-
+	for (int i = 0; i != num; i++)
+	{
+		this->course_history.insert(history[i]);
+	}
+	switch (cp_type)
+	{
+		case BST_CP:
+			this->course_plan = new BST<Course, int>;
+			break;
+		case AVL_CP:
+			this->course_plan = new AVL<Course, int>;
+			break;
+		default:
+			this->course_plan = NULL;
+	}
 }
 
 /* TODO: Add a course into course_history
@@ -21,14 +35,14 @@ Student::Student(const string& id, const int* history, int num, CP_TYPE cp_type)
  */
 void Student::update_course_history(const map<int, Course>& course_db, int code)
 {
-	//Write your codes here.
-
-	//Check whether the course code is valid, i.e., it exists in the course_db.
-
-	//If it is valid, add it to course_history.
-
-	//Otherwise print an appropriate message, please refer to the sample output.
-
+	if (course_db.find(code) != course_db.end())
+	{
+		this->course_history.insert(code);
+	}
+	else
+	{
+		cout << id << ": Fail to update history with an invalid course " << code << "\n";
+	}
 }
 
 /* TODO:
@@ -39,9 +53,15 @@ void Student::update_course_history(const map<int, Course>& course_db, int code)
 void Student::print_course_history() const
 {
 	cout << id << ": Course history: ";
-
-	//Write your codes here
-
+	for (set<int>::iterator ptr = this->course_history.begin(); ptr != this->course_history.end(); ptr++)
+	{
+		if (ptr != this->course_history.begin())
+		{
+			cout << " ";
+		}
+		cout << *ptr;
+	}
+	cout << "\n";
 }
 
 /* TODO: Add a course into course_plan
@@ -50,16 +70,27 @@ void Student::print_course_history() const
  */
 void Student::enroll(const map<int, Course>& course_db, int code)
 {
-	//Write your codes here
-
-	//Check whether the course code is valid, if not then print an appropriate message.
-
-	//If the course code is valid, further check whether its pre-requisites are all completed.
-
-	//If all pre-requisites are completed, add the course into course_plan, otherwise print an appropriate message.
-
-	//Please refer to the sample output for all messages.
-
+	if (course_db.find(code) != course_db.end())
+	{
+		Course tar = course_db.find(code)->second;
+		bool complete = true;
+		for (int i = 0; i != tar.get_num_prerequisites(); i++)
+		{
+			if (this->course_history.find(tar.get_prerequisites(i)) == this->course_history.end())
+			{
+				complete = false;
+				break;
+			}
+		}
+		if (complete)
+		{
+			this->course_plan->insert(tar, code);
+		}
+		else
+		{
+			cout << "Can't enroll COMP" << code << ". Not all pre-requisites are satisfied yet.\n";
+		}
+	}
 }
 
 /* TODO:
@@ -67,7 +98,7 @@ void Student::enroll(const map<int, Course>& course_db, int code)
  */
 void Student::drop(const int code)
 {
-	//Write your codes here
+	this->course_plan->remove(code);
 }
 
 /* TODO: Select courses with course_code larger than base from course_plan

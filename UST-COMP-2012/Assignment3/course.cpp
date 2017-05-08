@@ -34,7 +34,7 @@ const Timeslot& Course::get_time() const
  */
 int Course::get_num_prerequisites() const
 {
-
+	return this->pre_requisites.size();
 }
 
 /* TODO
@@ -42,7 +42,7 @@ int Course::get_num_prerequisites() const
  */
 int Course::get_prerequisites(int index) const
 {
-
+	return this->pre_requisites[index];
 }
 
 /* Print out courses using an overloaded operator<< 

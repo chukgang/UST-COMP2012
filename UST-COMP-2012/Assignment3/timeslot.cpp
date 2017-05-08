@@ -31,7 +31,7 @@ bool Timeslot::match(int stime, int etime) const
  */
 string Timeslot::convert(weekday day) const
 {
-	//write your codes here
+	return this->weekday_string[day];
 }
 
 /* TODO
@@ -39,6 +39,22 @@ string Timeslot::convert(weekday day) const
  */
 ostream& operator<<(ostream& os, const Timeslot& time)
 {
-	//write your codes here
+	os << "Lecture time: " << time.day1 << "|" << time.day2 << " [";
+	if (time.start < 10)
+	{
+		os << "0" << time.start << ":00--";
+	}
+	else
+	{
+		os << time.start << ":00--";
+	}
+	if (time.end < 10)
+	{
+		os << "0" << time.end << ":00--";
+	}
+	else
+	{
+		os << time.end << ":00]";
+	}
+	return os;
 }
-

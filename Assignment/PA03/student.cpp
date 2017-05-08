@@ -68,17 +68,16 @@ void Student::enroll(const map<int, Course>& course_db, int code){
 	    //If the course code is valid, further check whether its pre-requisites are all completed.
 		bool allPrerequisitesCompleted = true;
 		bool prerequisitesCompleted = true;
-		Course* course = course_db.find(code)->second;
-		for(int i = 0; i < course->get_num_prerequisites(); i++){
-			vector<int>::iterator enrollIterator = course_history.begin();
-			for(; enrollIterator != course_history.end(); enrollIterator++){
-				if(enrollIterator == course->get_prerequisites(i)){
-					prerequisitesCompleted = true;
-					break;
-				}else{
-					prerequisitesCompleted = false;
-				}
+		Course course = course_db.find(code)->second;
+		for(int i = 0; i < course.get_num_prerequisites(); i++){
+			set<int>::const_iterator enrollIterator = course_history.begin();
+
+			if(course_history.find(course.get_prerequisites(i))){
+				prerequisitesCompleted = true;
+			}else{
+				prerequisitesCompleted = false;
 			}
+
 			if(prerequisitesCompleted == false){
 				allPrerequisitesCompleted = false;
 				break;
@@ -89,7 +88,7 @@ void Student::enroll(const map<int, Course>& course_db, int code){
 			cout << "Can't enroll " << code << ". Not all pre-requisites are satisfied yet.";
 		}else{
 			course_plan->insert(course_db.find(code)->second, code);
-			//course_plan->insert(course, code);
+			course_plan->insert(course, code);
 		}
 	}
     //Please refer to the sample output for all messages.

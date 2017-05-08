@@ -107,10 +107,16 @@ void Student::drop(const int code)
  */
 void Student::select_by_code(int base)
 {
-	cout << "Student ID: " << id << endl;
-
-	//Write your codes here
-
+	cout << "Student ID: " << this->id.c_str() << "\n";
+	this->course_plan->iterator_init();
+	while (!this->course_plan->iterator_end())
+	{
+		Course tar = this->course_plan->iterator_next();
+		if (tar.get_code() > base)
+		{
+			cout << tar << "\n";
+		}
+	}
 }
 
 /* TODO: Select courses that have lectures on day from the course_plan
@@ -118,10 +124,16 @@ void Student::select_by_code(int base)
  */
 void Student::select_by_day(weekday day)
 {
-	cout << "Student ID: " << id << endl;
-
-	//Write your codes here
-
+	cout << "Student ID: " << this->id.c_str() << "\n";
+	this->course_plan->iterator_init();
+	while (!this->course_plan->iterator_end())
+	{
+		Course tar = this->course_plan->iterator_next();
+		if (tar.get_time().match(day))
+		{
+			cout << tar << "\n";
+		}
+	}
 }
 
 /* TODO: Check the details of an enrolled course
@@ -129,10 +141,17 @@ void Student::select_by_day(weekday day)
  */
 void Student::check_course(int code) const
 {
-	//Write your codes here
-
-	//Please refer to the sample output for the output message.
-
+	this->course_plan->iterator_init();
+	while (!this->course_plan->iterator_end())
+	{
+		Course tar = this->course_plan->iterator_next();
+		if (tar.get_code() == code)
+		{
+			cout << tar << "\n";
+			return;
+		}
+	}
+	cout << "No\n";
 }
 
 /* TODO: Print all courses students plan to take 
@@ -140,10 +159,8 @@ void Student::check_course(int code) const
  */
 void Student::list_course_plan() const
 {
-	cout << "Student ID: " << id << endl;
-
-	//Write your codes here
-
+	cout << "Student ID: " << this->id.c_str() << "\n";
+	this->course_plan->preorder_traversal();
 }
 
 /* Print course_plan in a readable tree format.

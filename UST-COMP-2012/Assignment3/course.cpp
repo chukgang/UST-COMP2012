@@ -51,10 +51,14 @@ int Course::get_prerequisites(int index) const
 ostream& operator<<(ostream& os, const Course& course)
 {
 	os << "COMP" << course.course_code << "\tLecture time: " << course.lecture_time << "\tPre-Requisites: ";
-
 	for (int i = 0; i < course.pre_requisites.size(); i++)
-		os << course.pre_requisites[i] << " ";
-
+	{
+		if (i != 0)
+		{
+			os << " ";
+		}
+		os << course.pre_requisites[i];
+	}
 	return os;
 }
 

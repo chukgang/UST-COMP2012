@@ -15,14 +15,17 @@
 template<typename T, typename K>
 void BT<T, K>::preorder_traversal() const
 {
-	cout << "Key: " << this->root->key << "\tValue: " << this->root->value << "\n";
-	if (this->left_subtree() != NULL)
+	if (this->root != NULL)
 	{
-		this->left_subtree()->preorder_traversal();
-	}
-	if (this->right_subtree() != NULL)
-	{
-		this->right_subtree()->preorder_traversal();
+		cout << "Key: " << this->root->key << "\tValue: " << this->root->value << "\n";
+		if (this->left_subtree() != NULL)
+		{
+			this->left_subtree()->preorder_traversal();
+		}
+		if (this->right_subtree() != NULL)
+		{
+			this->right_subtree()->preorder_traversal();
+		}
 	}
 }
 

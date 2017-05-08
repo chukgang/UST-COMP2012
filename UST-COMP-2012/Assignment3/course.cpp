@@ -9,7 +9,7 @@
  *   prerequisites of size pre_num
  */
 Course::Course(int code, weekday day1, weekday day2, int stime, int etime, int* prerequisites, int pre_num)
-	: lecture_time(Timeslot(day1, day2, stime, etime))
+		: lecture_time(Timeslot(day1, day2, stime, etime))
 {
 	this->course_code = code;
 	for (int i = 0; i != pre_num; i++)
@@ -50,8 +50,7 @@ int Course::get_prerequisites(int index) const
  */
 ostream& operator<<(ostream& os, const Course& course)
 {
-	os << "COMP" << course.course_code << "\tLecture time: "
-			<< course.lecture_time << "\tPre-Requisites: ";
+	os << "COMP" << course.course_code << "\tLecture time: " << course.lecture_time << "\tPre-Requisites: ";
 
 	for (int i = 0; i < course.pre_requisites.size(); i++)
 		os << course.pre_requisites[i] << " ";

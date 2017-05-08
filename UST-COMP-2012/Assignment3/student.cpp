@@ -15,23 +15,21 @@ Student::Student(const string& id, const int* history, int num, CP_TYPE cp_type)
 
 }
 
-
 /* TODO: Add a course into course_history
  *   course_db is a database containing all valid courses, stored in an STL map
  *   The key values used in the STL map are the course code
  */
 void Student::update_course_history(const map<int, Course>& course_db, int code)
 {
-    //Write your codes here.
+	//Write your codes here.
 
-    //Check whether the course code is valid, i.e., it exists in the course_db.
+	//Check whether the course code is valid, i.e., it exists in the course_db.
 
-    //If it is valid, add it to course_history.
+	//If it is valid, add it to course_history.
 
-    //Otherwise print an appropriate message, please refer to the sample output.
+	//Otherwise print an appropriate message, please refer to the sample output.
 
 }
-
 
 /* TODO:
  * Print completed courses in ascending order of the course codes
@@ -40,12 +38,11 @@ void Student::update_course_history(const map<int, Course>& course_db, int code)
  */
 void Student::print_course_history() const
 {
-    cout << id << ": Course history: ";
+	cout << id << ": Course history: ";
 
-    //Write your codes here
+	//Write your codes here
 
 }
-
 
 /* TODO: Add a course into course_plan
  *   course_db is a database containing all valid courses, stored in an STL map
@@ -53,15 +50,15 @@ void Student::print_course_history() const
  */
 void Student::enroll(const map<int, Course>& course_db, int code)
 {
-    //Write your codes here
+	//Write your codes here
 
-    //Check whether the course code is valid, if not then print an appropriate message.
+	//Check whether the course code is valid, if not then print an appropriate message.
 
-    //If the course code is valid, further check whether its pre-requisites are all completed.
+	//If the course code is valid, further check whether its pre-requisites are all completed.
 
-    //If all pre-requisites are completed, add the course into course_plan, otherwise print an appropriate message.
+	//If all pre-requisites are completed, add the course into course_plan, otherwise print an appropriate message.
 
-    //Please refer to the sample output for all messages.
+	//Please refer to the sample output for all messages.
 
 }
 
@@ -70,18 +67,17 @@ void Student::enroll(const map<int, Course>& course_db, int code)
  */
 void Student::drop(const int code)
 {
-    //Write your codes here
+	//Write your codes here
 }
-
 
 /* TODO: Select courses with course_code larger than base from course_plan
  * Remark: Print the selected courses in ascending order of the course codes
  */
 void Student::select_by_code(int base)
 {
-    cout << "Student ID: " << id << endl;
+	cout << "Student ID: " << id << endl;
 
-    //Write your codes here
+	//Write your codes here
 
 }
 
@@ -90,9 +86,9 @@ void Student::select_by_code(int base)
  */
 void Student::select_by_day(weekday day)
 {
-    cout << "Student ID: " << id << endl;
+	cout << "Student ID: " << id << endl;
 
-    //Write your codes here
+	//Write your codes here
 
 }
 
@@ -101,22 +97,20 @@ void Student::select_by_day(weekday day)
  */
 void Student::check_course(int code) const
 {
-    //Write your codes here
+	//Write your codes here
 
-    //Please refer to the sample output for the output message.
+	//Please refer to the sample output for the output message.
 
 }
-    
-
 
 /* TODO: Print all courses students plan to take 
  * Remark: Print the courses stored in the BT in preorder format
  */
 void Student::list_course_plan() const
 {
-    cout << "Student ID: " << id << endl;
-    
-    //Write your codes here
+	cout << "Student ID: " << id << endl;
+
+	//Write your codes here
 
 }
 
@@ -125,6 +119,6 @@ void Student::list_course_plan() const
  */
 void Student::print_course_plan_tree() const
 {
-    cout << "Student ID: " << id << endl;
-    course_plan->print();
+	cout << "Student ID: " << id << endl;
+	course_plan->print();
 }

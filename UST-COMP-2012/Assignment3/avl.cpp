@@ -5,6 +5,8 @@
 #ifndef AVL_CPP
 #define AVL_CPP
 
+#include "avl.h"
+
 /* TODO
  * Goal: To find the balance factor of an AVL tree
  *       balance factor = height of right sub-tree - height of left sub-tree
@@ -55,7 +57,8 @@ void AVL<T, K>::fix_height() const
 	if (left > right)
 	{
 		this->root->bt_height = left + 1;
-	} else
+	}
+	else
 	{
 		this->root->bt_height = right + 1;
 	}

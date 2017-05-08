@@ -106,7 +106,21 @@ void BST<T, K>::remove(const K& k)
 	}
 	if (this->root->key == k)
 	{
-		if (this->right_subtree() != NULL)
+		if (this->left_subtree() == NULL && this->right_subtree() != NULL)
+		{
+			BST<T, K>* tar = dynamic_cast<BST<T, K>*>(this->right_subtree());
+			this->root->right = NULL;
+			delete this->root;
+			this->root = tar->root;
+		}
+		else if (this->left_subtree() != NULL && this->right_subtree() == NULL)
+		{
+			BST<T, K>* tar = dynamic_cast<BST<T, K>*>(this->left_subtree());
+			this->root->left = NULL;
+			delete this->root;
+			this->root = tar->root;
+		}
+		else if (this->left_subtree() != NULL && this->right_subtree() != NULL)
 		{
 			BST<T, K>* parent = this;
 			BST<T, K>* child = dynamic_cast<BST<T, K>*>(this->right_subtree());
@@ -132,18 +146,6 @@ void BST<T, K>::remove(const K& k)
 					}
 					delete child;
 				}
-			}
-		}
-		else if (this->left_subtree() != NULL)
-		{
-			BST<T, K>* tar = dynamic_cast<BST<T, K>*>(this->left_subtree());
-			this->root->value = tar->root->value;
-			this->root->key = tar->root->key;
-			tar->remove(tar->root->key);
-			if (tar->root == NULL)
-			{
-				this->root->left = NULL;
-				delete tar;
 			}
 		}
 		else

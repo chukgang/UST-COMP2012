@@ -117,8 +117,8 @@ void BST<T, K>::remove(const K& k)
 			}
 			if (child != NULL)
 			{
-				parent->root->key = child->root->key;
-				parent->root->value = child->root->value;
+				this->root->key = child->root->key;
+				this->root->value = child->root->value;
 				child->remove(child->root->key);
 				if (child->root == NULL)
 				{

@@ -8,7 +8,6 @@
 #include <iostream>
 #include "bt.h"
 using namespace std;
-
 /* TODO
  * Goal: Do preorder traversal on the tree
  * Remark: print both value and key fields of each node
@@ -28,6 +27,4 @@ void BT<T,K>::preorder_traversal() const{
 		}
 	}
 }
-
-
 #endif /* BT_CPP */

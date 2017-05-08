@@ -73,8 +73,8 @@ int main()
     // Create 2 students with the same course plan,
     // one represented by AVL, the other by BST
     int history[] = {1004, 1021, 1022, 1029, 1942};
-    Student s1("BST-006", history, 5, BST_CP); // course_plan stored in an AVL
-    Student s2("AVL-007", history, 5, AVL_CP); // course_plan stored in a BST
+    Student s1("BST-006", history, 5, BST_CP); // course_plan stored in a BST
+    Student s2("AVL-007", history, 5, AVL_CP); // course_plan stored in an AVL
     s1.print_course_history(); // print initial course history of s1
     s2.print_course_history(); // print initial course history of s2
     cout << endl;

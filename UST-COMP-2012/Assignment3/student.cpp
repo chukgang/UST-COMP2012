@@ -12,6 +12,7 @@
  */
 Student::Student(const string& id, const int* history, int num, CP_TYPE cp_type)
 {
+	this->id = id;
 	for (int i = 0; i != num; i++)
 	{
 		this->course_history.insert(history[i]);
@@ -52,7 +53,7 @@ void Student::update_course_history(const map<int, Course>& course_db, int code)
  */
 void Student::print_course_history() const
 {
-	cout << id << ": Course history: ";
+	cout << this->id.c_str() << ": Course history: ";
 	for (set<int>::iterator ptr = this->course_history.begin(); ptr != this->course_history.end(); ptr++)
 	{
 		if (ptr != this->course_history.begin())

@@ -104,6 +104,7 @@ void Student::select_by_code(int base){
     //Write your codes here
     course_plan->iterator_init();
     while(!course_plan->iterator_end()){
+		cout << "now" << endl;
     	Course course = course_plan->iterator_next();
     	if(course.get_code() > base){
     		cout << course << endl;
@@ -134,14 +135,17 @@ void Student::select_by_day(weekday day){
 void Student::check_course(int code) const{
     //Write your codes here
     //Please refer to the sample output for the output message.
-	if(course_plan->search(code)){
+	if(course_plan->search(code) != NULL){
 	    course_plan->iterator_init();
 	    while(!course_plan->iterator_end()){
 	    	Course course = course_plan->iterator_next();
 	    	if(course.get_code() == code){
 	    		cout << course << endl;
+	    		break;
 	    	}
 	    }
+	}else{
+		cout << "No" << endl;
 	}
 
 }

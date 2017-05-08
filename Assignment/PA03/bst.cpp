@@ -21,9 +21,17 @@ BT<T,K>* BST<T,K>::search(const K& k){
 		return NULL;
 	}
 	if(k > this->root->key){
-		return dynamic_cast<BST<T, K>*>(this->root->right)->search(k);
+		if(this->root->right != NULL){
+			return dynamic_cast<BST<T, K>*>(this->root->right)->search(k);
+		}else{
+			return NULL;
+		}
 	}else if(k < this->root->key){
-		return dynamic_cast<BST<T, K>*>(this->root->left)->search(k);
+		if(this->root->left != NULL){
+			return dynamic_cast<BST<T, K>*>(this->root->left)->search(k);
+		}else{
+			return NULL;
+		}
 	}else{
 		return this;
 	}
@@ -98,21 +106,28 @@ void BST<T,K>::remove(const K& k){
 		if(this->root->right != NULL){
 			BST<T, K>* parent  = this;
 			BST<T, K>* child = dynamic_cast<BST<T, K>*>(this->root->right);
-			while(child->root->left != NULL){
-				parent = child;
-				child = dynamic_cast<BST<T, K>*>(this->root->left);
-			}
-			if(child != NULL){
+			if(this->root->left == NULL){
 				parent->root->key = child->root->key;
 				parent->root->value = child->root->value;
-				child->remove(child->root->key);
-				if(child->root == NULL){
-					if(parent->root->left == child){
-						parent->root->left = NULL;
-					}else{
-						parent->root->right = NULL;
+				parent->root->left = child->root->left;
+				parent->root->right = child->root->right;
+			}else{
+				while(child->root->left != NULL){
+					parent = child;
+					child = dynamic_cast<BST<T, K>*>(child->root->left);
+				}
+				if(child != NULL){
+					parent->root->key = child->root->key;
+					parent->root->value = child->root->value;
+					child->remove(child->root->key);
+					if(child->root == NULL){
+						if(parent->root->left == child){
+							parent->root->left = NULL;
+						}else{
+							parent->root->right = NULL;
+						}
+						delete child;
 					}
-					delete child;
 				}
 			}
 		}else if(this->root->left != NULL){
@@ -125,8 +140,8 @@ void BST<T,K>::remove(const K& k){
 				delete target;
 			}
 		}else{
-			delete this->root;
 			this->root = NULL;
+			delete this->root;
 			return;
 		}
 	}else if(k < this->root->key){
@@ -191,7 +206,11 @@ T& BST<T,K>::iterator_next(){
 	if(this->istack.empty() && this->current == this->root){
 		while(this->current != NULL){
 			this->istack.push(this->current);
-			this->current = dynamic_cast<BST<T, K>*>(this->current->left)->root;
+			if(this->current->left != NULL){
+				this->current = dynamic_cast<BST<T, K>*>(this->current->left)->root;
+			}else{
+				break;
+			}
 		}
 		this->current = this->istack.top();
 	}
@@ -203,13 +222,21 @@ T& BST<T,K>::iterator_next(){
 			this->istack.pop();
 			while(this->current != NULL){
 				this->istack.push(this->current);
-				this->current = dynamic_cast<BST<T, K>*>(this->current->left)->root;
+				if(this->current->left != NULL){
+					this->current = dynamic_cast<BST<T, K>*>(this->current->left)->root;
+				}else{
+					break;
+				}
 			}
 			this->current = this->istack.top();
 			return returnValue;
 		}else{
 			this->istack.pop();
-			this->current = this->istack.top();
+			if(!this->istack.empty()){
+				this->current = this->istack.top();
+			}else{
+				this->current = NULL;
+			}
 			return returnValue;
 		}
 	}else{

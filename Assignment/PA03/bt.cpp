@@ -18,6 +18,8 @@ void BT<T,K>::preorder_traversal() const{
 	stack<node*> preorderTraversal;
 	if(this->root != NULL){
 		cout << "Key: " << this->root->key << "\tValue: " << this->root->value << endl;
+	}else{
+		return;
 	}
 	if(this->root->right != NULL){
 		preorderTraversal.push(this->root->right->root);

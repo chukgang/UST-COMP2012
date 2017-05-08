@@ -14,8 +14,7 @@
  * Return: (int) balance factor
  */
 template <typename T, typename K>
-int AVL<T,K>::bfactor() const
-{
+int AVL<T,K>::bfactor() const{
     //write your codes here
 }
 
@@ -24,8 +23,7 @@ int AVL<T,K>::bfactor() const
  * Goal: To rectify the height values of each node of of an AVL tree 
  */
 template <typename T, typename K>
-void AVL<T,K>::fix_height() const
-{
+void AVL<T,K>::fix_height() const{
     //write your codes here
 }
 
@@ -34,8 +32,7 @@ void AVL<T,K>::fix_height() const
  * Goal: To perform a single left (anti-clocwise) rotation of the root 
  */
 template <typename T, typename K>
-void AVL<T,K>::rotate_left() 
-{
+void AVL<T,K>::rotate_left(){
     //write your codes here
 }
 
@@ -44,8 +41,7 @@ void AVL<T,K>::rotate_left()
  * Goal: To perform right (clockwise) rotation of the root 
  */
 template <typename T, typename K>
-void AVL<T,K>::rotate_right()
-{
+void AVL<T,K>::rotate_right(){
      //write your codes here
 }
 
@@ -53,8 +49,7 @@ void AVL<T,K>::rotate_right()
  * Goal: To balance an AVL tree 
  */
 template <typename T, typename K>
-void AVL<T,K>::balance()
-{
+void AVL<T,K>::balance(){
      //write your codes here
 }
 
@@ -63,8 +58,7 @@ void AVL<T,K>::balance()
  * Goal: To insert an item x with key k to AVL tree
  */
 template <typename T, typename K>
-void AVL<T,K>::insert(const T& x, const K& k)
-{
+void AVL<T,K>::insert(const T& x, const K& k){
      //write your codes here
 }
 
@@ -74,8 +68,7 @@ void AVL<T,K>::insert(const T& x, const K& k)
  * Goal: To remove an item with key k in AVL tree 
  */
 template <typename T, typename K>
-void AVL<T,K>::remove(const K& k)
-{
+void AVL<T,K>::remove(const K& k){
      //write your codes here
 }
 

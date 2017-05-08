@@ -42,6 +42,7 @@ string Timeslot::convert(weekday day) const{
 	}else if(day == 4){
 		return "Fri";
 	}
+	return "";
 }
 
 /* TODO
@@ -49,14 +50,14 @@ string Timeslot::convert(weekday day) const{
  */
 ostream& operator<<(ostream& os, const Timeslot& time){
 	//write your codes here
-	os << "Lecture time: " << time.day1 << "|" << time.day2 << " [";
+	os << time.convert(time.day1) << "|" << time.convert(time.day2) << " [";
 	if(time.start < 10){
 		os << "0" << time.start << ":00--";
 	}else{
 		os << time.start << ":00--";
 	}
 	if(time.end < 10){
-		os << "0" << time.end << ":00--";
+		os << "0" << time.end << ":00]";
 	}else{
 		os << time.end << ":00]";
 	}

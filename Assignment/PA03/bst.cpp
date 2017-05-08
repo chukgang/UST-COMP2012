@@ -55,12 +55,23 @@ void BST<T,K>::insert(const T& x, const K& k){
 		this->root = new bt_node(x, k);
 	}
 	if(k > this->root->key){
-		dynamic_cast<BST<T, K>*>(this->root->right)->insert(k);
+		if(this->root->right == NULL){
+			this->root->right = new BST<T, K>;
+			dynamic_cast<BST<T, K>*>(this->root->right)->root = new bt_node(x, k);
+			return;
+		}else{
+			dynamic_cast<BST<T, K>*>(this->root->right)->insert(x, k);
+		}
 	}else if(k < this->root->key){
-		dynamic_cast<BST<T, K>*>(this->root->left)->insert(k);
+		if (this->root->left == NULL){
+			this->root->left = new BST<T, K>;
+			dynamic_cast<BST<T, K>*>(this->root->left)->root = new bt_node(x, k);
+			return;
+		}else{
+			dynamic_cast<BST<T, K>*>(this->root->left)->insert(x, k);
+		}
+
 	}else{
-		this->root->remove(k);
-		this->root->insert(x, k);
 		return;
 	}
 }
@@ -72,6 +83,79 @@ void BST<T,K>::insert(const T& x, const K& k){
 template <typename T, typename K>
 void BST<T,K>::remove(const K& k){
     //write your codes here
+	K key = k;
+	if(!this->iterator_end()){
+		key = this->current->key;
+		this->iterator_next();
+		if(key == k){
+			if(!this->iterator_end()){
+				key = this->current->key;
+				this->iterator_next();
+			}
+		}
+	}
+	if(k == this->root->key){
+		if(this->root->right != NULL){
+			BST<T, K>* parent  = this;
+			BST<T, K>* child = dynamic_cast<BST<T, K>*>(this->root->right);
+			while(child->root->left != NULL){
+				parent = child;
+				child = dynamic_cast<BST<T, K>*>(this->root->left);
+			}
+			if(child != NULL){
+				parent->root->key = child->root->key;
+				parent->root->value = child->root->value;
+				child->remove(child->root->key);
+				if(child->root == NULL){
+					if(parent->root->left == child){
+						parent->root->left = NULL;
+					}else{
+						parent->root->right = NULL;
+					}
+					delete child;
+				}
+			}
+		}else if(this->root->left != NULL){
+			BST<T, K>* target = dynamic_cast<BST<T, K>*>(this->root->left);
+			this->root->value = target->root->value;
+			this->root->key = target->root->key;
+			target->remove(target->root->key);
+			if(target->root == NULL){
+				this->root->left = NULL;
+				delete target;
+			}
+		}else{
+			delete this->root;
+			this->root = NULL;
+			return;
+		}
+	}else if(k < this->root->key){
+		BST<T, K>* target = dynamic_cast<BST<T, K>*>(this->root->left);
+		target->remove(k);
+		if(target->root == NULL){
+			this->root->left = NULL;
+			delete target;
+		}
+	}else{
+		BST<T, K>* target = dynamic_cast<BST<T, K>*>(this->root->right);
+		target->remove(k);
+		if(target->root == NULL){
+			this->root->right = NULL;
+		}
+	}
+	if(!this->iterator_end()){
+		bt_node* copy = this->root;
+		BST<T, K>* target = this;
+		this->iterator_init();
+		while(target->root->left != NULL){
+			target = dynamic_cast<BST<T, K>*>(target->root->left);
+		}
+		copy = target->root;
+		while(copy->key != key){
+			this->iterator_next();
+			copy = this->current;
+		}
+	}
 }
 
 
@@ -107,17 +191,29 @@ T& BST<T,K>::iterator_next(){
 	if(this->istack.empty() && this->current == this->root){
 		while(this->current != NULL){
 			this->istack.push(this->current);
-			this->current = dynam(this->current->left);
+			this->current = dynamic_cast<BST<T, K>*>(this->current->left)->root;
 		}
 		this->current = this->istack.top();
 	}
 	if(!this->istack.empty()){
-		BT<T, K>* returnNode = this->istack.top();
-		this->istack.pop();
-		if(returnNode->root->right != NULL){
-			this->current = returnNode->root->right;
-
+		this->current = this->istack.top();
+		T& returnValue = this->current->value;
+		if(this->current->right != NULL){
+			this->current = dynamic_cast<BST<T, K>*>(this->current->right)->root;
+			this->istack.pop();
+			while(this->current != NULL){
+				this->istack.push(this->current);
+				this->current = dynamic_cast<BST<T, K>*>(this->current->left)->root;
+			}
+			this->current = this->istack.top();
+			return returnValue;
+		}else{
+			this->istack.pop();
+			this->current = this->istack.top();
+			return returnValue;
 		}
+	}else{
+		this->current = NULL;
 	}
 }
 

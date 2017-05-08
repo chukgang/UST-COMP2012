@@ -16,14 +16,24 @@ template <typename T, typename K>
 void BT<T,K>::preorder_traversal() const{
     //write your codes here
 	stack<node*> preorderTraversal;
-	preorderTraversal.push(root);
+	if(this->root != NULL){
+		cout << "Key: " << this->root->key << "\tValue: " << this->root->value << endl;
+	}
+	if(this->root->right != NULL){
+		preorderTraversal.push(this->root->right->root);
+	}
+	if(this->root->left != NULL){
+		preorderTraversal.push(this->root->left->root);
+	}
 	while(!preorderTraversal.empty()){
 		cout << "Key: " << preorderTraversal.top()->key << "\tValue: " << preorderTraversal.top()->value << endl;
-		if(preorderTraversal.top()->right != NULL){
-			preorderTraversal.push(preorderTraversal.top()->right->root);
+		node* next = preorderTraversal.top();
+		preorderTraversal.pop();
+		if(next->right != NULL){
+			preorderTraversal.push(next->right->root);
 		}
-		if(preorderTraversal.top()->left != NULL){
-			preorderTraversal.push(preorderTraversal.top()->left->root);
+		if(next->left != NULL){
+			preorderTraversal.push(next->left->root);
 		}
 	}
 }

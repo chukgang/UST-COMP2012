@@ -32,7 +32,6 @@ void Student::update_course_history(const map<int, Course>& course_db, int code)
 	if(course_db.find(code) != course_db.end()){
 		//If it is valid, add it to course_history.
 		this->course_history.insert(code);
-		print_course_history();
 	}else{
 		//Otherwise print an appropriate message, please refer to the sample output.
 		cout << id << ": Fail to update history with an invalid course " << code << endl;
@@ -49,9 +48,8 @@ void Student::print_course_history() const{
     cout << id << ": Course history: ";
     //Write your codes here
     set<int>::iterator historyIterator = course_history.begin();
-    cout << *historyIterator;
     for(; historyIterator != course_history.end(); historyIterator++){
-    	cout << *historyIterator;
+    	cout << *historyIterator << " ";
     }
     cout << endl;
 }
@@ -78,11 +76,13 @@ void Student::enroll(const map<int, Course>& course_db, int code){
 		}
 		//If all pre-requisites are completed, add the course into course_plan, otherwise print an appropriate message.
 		if(prerequisitesCompleted == false){
-			cout << "Can't enroll " << code << ". Not all pre-requisites are satisfied yet.";
+		    cout << id << ": Can't enroll " << code << ". Not all pre-requisites are satisfied yet." << endl;
 		}else{
 			course_plan->insert(course_db.find(code)->second, code);
 			course_plan->insert(course, code);
 		}
+	}else{
+		cout << id << ": Fail to enroll an invalid course " << code << endl;
 	}
     //Please refer to the sample output for all messages.
 }
@@ -103,9 +103,8 @@ void Student::select_by_code(int base){
     cout << "Student ID: " << id << endl;
     //Write your codes here
     course_plan->iterator_init();
-    Course course;
     while(!course_plan->iterator_end()){
-    	course = course_plan->iterator_next();
+    	Course course = course_plan->iterator_next();
     	if(course.get_code() > base){
     		cout << course << endl;
     	}
@@ -120,9 +119,8 @@ void Student::select_by_day(weekday day){
     cout << "Student ID: " << id << endl;
     //Write your codes here
     course_plan->iterator_init();
-    Course course;
     while(!course_plan->iterator_end()){
-    	course = course_plan->iterator_next();
+    	Course course = course_plan->iterator_next();
     	if(course.get_time().match(day)){
     		cout << course << endl;
     	}
@@ -138,9 +136,8 @@ void Student::check_course(int code) const{
     //Please refer to the sample output for the output message.
 	if(course_plan->search(code)){
 	    course_plan->iterator_init();
-	    Course course;
 	    while(!course_plan->iterator_end()){
-	    	course = course_plan->iterator_next();
+	    	Course course = course_plan->iterator_next();
 	    	if(course.get_code() == code){
 	    		cout << course << endl;
 	    	}

@@ -103,7 +103,6 @@ void Student::select_by_code(int base){
     //Write your codes here
     course_plan->iterator_init();
     while(!course_plan->iterator_end()){
-		cout << "now" << endl;
     	Course course = course_plan->iterator_next();
     	if(course.get_code() > base){
     		cout << course << endl;

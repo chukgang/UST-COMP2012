@@ -140,8 +140,8 @@ void BST<T,K>::remove(const K& k){
 				delete target;
 			}
 		}else{
-			this->root = NULL;
 			delete this->root;
+			this->root = NULL;
 			return;
 		}
 	}else if(k < this->root->key){

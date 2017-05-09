@@ -34,7 +34,7 @@ void Student::update_course_history(const map<int, Course>& course_db, int code)
 		this->course_history.insert(code);
 	}else{
 		//Otherwise print an appropriate message, please refer to the sample output.
-		cout << id << ": Fail to update history with an invalid course " << code << endl;
+		cout << id << ": Fail to update history with an invalid course COMP" << code << endl;
 	}
 }
 
@@ -76,12 +76,12 @@ void Student::enroll(const map<int, Course>& course_db, int code){
 		}
 		//If all pre-requisites are completed, add the course into course_plan, otherwise print an appropriate message.
 		if(prerequisitesCompleted == false){
-		    cout << id << ": Can't enroll " << code << ". Not all pre-requisites are satisfied yet." << endl;
+		    cout << id << ": Can't enroll COMP" << code << ". Not all pre-requisites are satisfied yet." << endl;
 		}else{
 			course_plan->insert(course_db.find(code)->second, code);
 		}
 	}else{
-		cout << id << ": Fail to enroll an invalid course " << code << endl;
+		cout << id << ": Fail to enroll an invalid course COMP" << code << endl;
 	}
     //Please refer to the sample output for all messages.
 }

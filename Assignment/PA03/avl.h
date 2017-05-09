@@ -7,7 +7,8 @@
 
 #include "bst.h"
 
-template <typename T, typename K> class AVL : public BST<T,K>{
+template <typename T, typename K> class AVL : public BST<T,K>
+{
   private:
     int bfactor() const;     // TODO: find the balance factor of tree
     void fix_height() const; // TODO: rectify the height of each node in tree

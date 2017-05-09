@@ -110,18 +110,14 @@ int main()
     s1.enroll(db, 1001);
     s1.enroll(db, 1999);
     s1.enroll(db, 2021);
-    s1.print_course_plan_tree(); cout << endl; // BST tree
-
     s2.enroll(db, 2611); // s2 enrolls courses
-    s2.print_course_plan_tree(); cout << endl; // AVL tree
     s2.enroll(db, 1001);
-    s2.print_course_plan_tree(); cout << endl; // AVL tree
     s2.enroll(db, 1999);
-    s2.print_course_plan_tree(); cout << endl; // AVL tree
     s2.enroll(db, 2021);
 
     // Print course plans in the tree format
-    s2.print_course_plan_tree(); cout << endl; // AVL tree
+    s1.print_course_plan_tree(); cout << endl;
+    s2.print_course_plan_tree(); cout << endl;
 
     cout << "After further enrolling courses 3021, 4211, 3111, 4321:" << endl;
     s1.enroll(db, 3021);
@@ -129,17 +125,13 @@ int main()
     s1.enroll(db, 3111);
     s1.enroll(db, 4321);
     s2.enroll(db, 3021);
-    s2.print_course_plan_tree(); cout << endl; // AVL tree
     s2.enroll(db, 4211);
-    s2.print_course_plan_tree(); cout << endl; // AVL tree
     s2.enroll(db, 3111);
-    s2.print_course_plan_tree(); cout << endl; // AVL tree
     s2.enroll(db, 4321);
-    s2.print_course_plan_tree(); cout << endl; // AVL tree
 
     // Print course plans in the tree format
-    //s1.print_course_plan_tree(); cout << endl; // BST tree
-    //s2.print_course_plan_tree(); cout << endl; // AVL tree
+    s1.print_course_plan_tree(); cout << endl; // BST tree
+    s2.print_course_plan_tree(); cout << endl; // AVL tree
 
     cout << "S1's course plan -- preorder list format:" << endl;
     s1.list_course_plan(); // Print information of courses in s1's course plan

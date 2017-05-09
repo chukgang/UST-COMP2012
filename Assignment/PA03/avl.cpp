@@ -14,13 +14,13 @@
  */
 template<typename T, typename K>
 int AVL<T, K>::bfactor() const{
-	int left = 0;
-	int right = 0;
+	int left = -1;
+	int right = -1;
 	this->fix_height();
-	if(this->left_subtree() != NULL){
+	if(this->root->left != NULL){
 		left = (dynamic_cast<AVL<T, K>*>(this->root->left))->height();
 	}
-	if(this->right_subtree() != NULL){
+	if(this->root->right != NULL){
 		right = (dynamic_cast<AVL<T, K>*>(this->root->right))->height();
 	}
 	return right - left;
@@ -33,19 +33,19 @@ template<typename T, typename K>
 void AVL<T, K>::fix_height() const{
 	int left = 0;
 	int right = 0;
-	if(this->left_subtree() == NULL && this->right_subtree() == NULL){
+	if(this->root->left == NULL && this->root->right == NULL){
 		this->root->bt_height = 0;
 		return;
 	}
-	if(this->left_subtree() != NULL){
-		AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->root->left);
-		tar->fix_height();
-		left = tar->height();
+	if(this->root->left != NULL){
+		AVL<T, K>* target = dynamic_cast<AVL<T, K>*>(this->root->left);
+		target->fix_height();
+		left = target->height();
 	}
-	if(this->right_subtree() != NULL){
-		const AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->root->right);
-		tar->fix_height();
-		right = tar->height();
+	if(this->root->right != NULL){
+		AVL<T, K>* target = dynamic_cast<AVL<T, K>*>(this->root->right);
+		target->fix_height();
+		right = target->height();
 	}
 	if(left > right){
 		this->root->bt_height = left + 1;
@@ -61,12 +61,12 @@ void AVL<T, K>::fix_height() const{
  */
 template<typename T, typename K>
 void AVL<T, K>::rotate_left(){
-	AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->right_subtree());
-	bt_node* tar_node = tar->root;
-	this->root->right = tar_node->left;
-	tar->root = this->root;
-	this->root = tar_node;
-	this->root->left = tar;
+	AVL<T, K>* target = dynamic_cast<AVL<T, K>*>(this->root->right);
+	bt_node* targetNode = target->root;
+	this->root->right = targetNode->left;
+	target->root = this->root;
+	this->root = targetNode;
+	this->root->left = target;
 	this->fix_height();
 }
 
@@ -75,12 +75,12 @@ void AVL<T, K>::rotate_left(){
  */
 template<typename T, typename K>
 void AVL<T, K>::rotate_right(){
-	AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->left_subtree());
-	bt_node* tar_node = tar->root;
-	this->root->left = tar_node->right;
-	tar->root = this->root;
-	this->root = tar_node;
-	this->root->right = tar;
+	AVL<T, K>* target = dynamic_cast<AVL<T, K>*>(this->root->left);
+	bt_node* targetNode = target->root;
+	this->root->left = targetNode->right;
+	target->root = this->root;
+	this->root = targetNode;
+	this->root->right = target;
 	this->fix_height();
 }
 
@@ -90,21 +90,21 @@ void AVL<T, K>::rotate_right(){
 template<typename T, typename K>
 void AVL<T, K>::balance(){
 	if(this->root->right != NULL){
-		dynamic_cast<AVL<T, K>*>(this->right_subtree())->balance();
+		dynamic_cast<AVL<T, K>*>(this->root->right)->balance();
 	}
 	if(this->root->left != NULL){
-		dynamic_cast<AVL<T, K>*>(this->left_subtree())->balance();
+		dynamic_cast<AVL<T, K>*>(this->root->left)->balance();
 	}
-	if(this->bfactor() == 2){
-		AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->right_subtree());
-		if(tar->bfactor() < 0){
-			tar->rotate_right();
+	if(this->bfactor() > 1){
+		AVL<T, K>* target = dynamic_cast<AVL<T, K>*>(this->root->right);
+		if(target->bfactor() < 0){
+			target->rotate_right();
 		}
 		this->rotate_left();
-	}else if(this->bfactor() == -2){
-		AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->left_subtree());
-		if(tar->bfactor() > 0){
-			tar->rotate_left();
+	}else if(this->bfactor() < -1){
+		AVL<T, K>* target = dynamic_cast<AVL<T, K>*>(this->root->left);
+		if(target->bfactor() > 0){
+			target->rotate_left();
 		}
 		this->rotate_right();
 		}
@@ -120,20 +120,25 @@ void AVL<T, K>::insert(const T& x, const K& k){
 		this->root = new bt_node(x, k);
 		return;
 	}else if(this->root->key > k){
-		if(this->left_subtree() == NULL){
-			this->left_subtree() = new AVL<T, K>;
-			(dynamic_cast<AVL<T, K>*>(this->left_subtree()))->root = new bt_node(x, k);
+		if(this->root->left == NULL){
+			this->root->left = new AVL<T, K>;
+			(dynamic_cast<AVL<T, K>*>(this->root->left))->root = new bt_node(x, k);
+			this->balance();
 			return;
 		}
 		else{
-			(dynamic_cast<AVL<T, K>*>(this->left_subtree()))->insert(x, k);
+			(dynamic_cast<AVL<T, K>*>(this->root->left))->insert(x, k);
+			this->balance();
 		}
 	}else{
-		if(this->right_subtree() == NULL){
-			this->right_subtree() = new AVL<T, K>;
-			(dynamic_cast<AVL<T, K>*>(this->right_subtree()))->root = new bt_node(x, k);
+		if(this->root->right == NULL){
+			this->root->right = new AVL<T, K>;
+			(dynamic_cast<AVL<T, K>*>(this->root->right))->root = new bt_node(x, k);
+			this->balance();
+			return;
 		}else{
-			(dynamic_cast<AVL<T, K>*>(this->right_subtree()))->insert(x, k);
+			(dynamic_cast<AVL<T, K>*>(this->root->right))->insert(x, k);
+			this->balance();
 		}
 	}
 	this->balance();
@@ -143,8 +148,7 @@ void AVL<T, K>::insert(const T& x, const K& k){
  * Goal: To remove an item with key k in AVL tree 
  */
 template<typename T, typename K>
-void AVL<T, K>::remove(const K& k)
-{
+void AVL<T, K>::remove(const K& k){
 	K key = k;
 	if(!this->iterator_end()){
 		key = this->current->key;
@@ -157,22 +161,22 @@ void AVL<T, K>::remove(const K& k)
 		}
 	}
 	if(this->root->key == k){
-		if(this->left_subtree() == NULL && this->right_subtree() != NULL){
-			AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->right_subtree());
+		if(this->root->left == NULL && this->root->right != NULL){
+			AVL<T, K>* target = dynamic_cast<AVL<T, K>*>(this->root->right);
 			this->root->right = NULL;
 			delete this->root;
-			this->root = tar->root;
-		}else if(this->left_subtree() != NULL && this->right_subtree() == NULL){
-			AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->left_subtree());
+			this->root = target->root;
+		}else if(this->root->left != NULL && this->root->right == NULL){
+			AVL<T, K>* target = dynamic_cast<AVL<T, K>*>(this->root->left);
 			this->root->left = NULL;
 			delete this->root;
-			this->root = tar->root;
-		}else if(this->left_subtree() != NULL && this->right_subtree() != NULL){
+			this->root = target->root;
+		}else if(this->root->left != NULL && this->root->right != NULL){
 			AVL<T, K>* parent = this;
-			AVL<T, K>* child = dynamic_cast<AVL<T, K>*>(this->right_subtree());
-			while (child->left_subtree() != NULL){
+			AVL<T, K>* child = dynamic_cast<AVL<T, K>*>(this->root->right);
+			while (child->root->left != NULL){
 				parent = child;
-				child = dynamic_cast<AVL<T, K>*>(child->left_subtree());
+				child = dynamic_cast<AVL<T, K>*>(child->root->left);
 			}
 			if(child != NULL){
 				this->root->key = child->root->key;
@@ -193,33 +197,33 @@ void AVL<T, K>::remove(const K& k)
 			return;
 		}
 	}else if(this->root->key > k){
-		AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->left_subtree());
-		tar->remove(k);
-		if(tar->root == NULL){
+		AVL<T, K>* target = dynamic_cast<AVL<T, K>*>(this->root->left);
+		target->remove(k);
+		if(target->root == NULL){
 			this->root->left = NULL;
-			delete tar;
+			delete target;
 		}
 	}else{
-		AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->right_subtree());
-		tar->remove(k);
-		if(tar->root == NULL){
+		AVL<T, K>* target = dynamic_cast<AVL<T, K>*>(this->root->right);
+		target->remove(k);
+		if(target->root == NULL){
 			this->root->right = NULL;
 		}
 	}
 	this->balance();
 	if(!this->iterator_end()){
-		bt_node* duplicate = this->root;
-		AVL<T, K>* tar = this;
+		bt_node* copy = this->root;
+		AVL<T, K>* target = this;
 		this->iterator_init();
-		while (tar->left_subtree() != NULL){
-			tar = dynamic_cast<AVL<T, K>*>(tar->left_subtree());
+		while (target->root->left != NULL){
+			target = dynamic_cast<AVL<T, K>*>(target->root->left);
 		}
-		duplicate = tar->root;
-		while (duplicate->key != key){
+		copy = target->root;
+		while (copy->key != key){
 			this->iterator_next();
-			duplicate = this->current;
+			copy = this->current;
 		}
 	}
 }
 
-#endif/* AVL_CPP */
+#endif/* AVL_C*/

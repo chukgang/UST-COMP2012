@@ -15,8 +15,8 @@
 template<typename T, typename K>
 int AVL<T, K>::bfactor() const
 {
-	int left = 0;
-	int right = 0;
+	int left = -1;
+	int right = -1;
 	this->fix_height();
 	if (this->left_subtree() != NULL)
 	{
@@ -101,25 +101,28 @@ void AVL<T, K>::rotate_right()
 template<typename T, typename K>
 void AVL<T, K>::balance()
 {
-	 if (this->bfactor() == 2)
-	 {
-	 AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->right_subtree());
-	 if (tar->bfactor() < 0)
-	 {
-	 tar->rotate_right();
-	 }
-	 this->rotate_left();
-	 }
-	 else if (this->bfactor() == -2)
-	 {
-	 AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->left_subtree());
-	 if (tar->bfactor() > 0)
-	 {
-	 tar->rotate_left();
-	 }
-	 this->rotate_right();
-	 }
-	 return;
+	if (this->root == NULL)
+	{
+		return;
+	}
+	if (this->bfactor() == 2)
+	{
+		AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->root->right);
+		if (tar->bfactor() < 0)
+		{
+			tar->rotate_right();
+		}
+		this->rotate_left();
+	}
+	else if (this->bfactor() == -2)
+	{
+		AVL<T, K>* tar = dynamic_cast<AVL<T, K>*>(this->root->left);
+		if (tar->bfactor() > 0)
+		{
+			tar->rotate_left();
+		}
+		this->rotate_right();
+	}
 }
 
 /* TODO
@@ -131,7 +134,6 @@ void AVL<T, K>::insert(const T& x, const K& k)
 	if (this->root == NULL)
 	{
 		this->root = new bt_node(x, k);
-		return;
 	}
 	else if (this->root->key > k)
 	{
@@ -139,14 +141,13 @@ void AVL<T, K>::insert(const T& x, const K& k)
 		{
 			this->left_subtree() = new AVL<T, K>;
 			(dynamic_cast<AVL<T, K>*>(this->left_subtree()))->root = new bt_node(x, k);
-			return;
 		}
 		else
 		{
 			(dynamic_cast<AVL<T, K>*>(this->left_subtree()))->insert(x, k);
 		}
 	}
-	else
+	else if (this->root->key < k)
 	{
 		if (this->right_subtree() == NULL)
 		{
@@ -159,6 +160,7 @@ void AVL<T, K>::insert(const T& x, const K& k)
 		}
 	}
 	this->balance();
+	return;
 }
 
 /* TODO

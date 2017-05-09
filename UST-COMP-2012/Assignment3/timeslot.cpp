@@ -50,7 +50,7 @@ ostream& operator<<(ostream& os, const Timeslot& time)
 	}
 	if (time.end < 10)
 	{
-		os << "0" << time.end << ":00--";
+		os << "0" << time.end << ":00]";
 	}
 	else
 	{

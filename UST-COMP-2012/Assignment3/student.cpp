@@ -42,7 +42,7 @@ void Student::update_course_history(const map<int, Course>& course_db, int code)
 	}
 	else
 	{
-		cout << this->id.c_str() << ": Fail to update history with an invalid course " << code << "\n";
+		cout << this->id.c_str() << ": Fail to update history with an invalid course COMP" << code << "\n";
 	}
 }
 
@@ -89,8 +89,12 @@ void Student::enroll(const map<int, Course>& course_db, int code)
 		}
 		else
 		{
-			cout << "Can't enroll COMP" << code << ". Not all pre-requisites are satisfied yet.\n";
+			cout << this->id.c_str() << ": Can't enroll COMP" << code << ". Not all pre-requisites are satisfied yet.\n";
 		}
+	}
+	else
+	{
+		cout << this->id.c_str() << ": Fail to enroll an invalid course COMP" << code << "\n";
 	}
 }
 

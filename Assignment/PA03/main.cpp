@@ -125,12 +125,15 @@ int main()
     s1.enroll(db, 3111);
     s1.enroll(db, 4321);
     s2.enroll(db, 3021);
+    s2.print_course_plan_tree(); cout << endl; // AVL tree
     s2.enroll(db, 4211);
+    s2.print_course_plan_tree(); cout << endl; // AVL tree
     s2.enroll(db, 3111);
+    s2.print_course_plan_tree(); cout << endl; // AVL tree
     s2.enroll(db, 4321);
 
     // Print course plans in the tree format
-    s1.print_course_plan_tree(); cout << endl; // BST tree
+    //s1.print_course_plan_tree(); cout << endl; // BST tree
     s2.print_course_plan_tree(); cout << endl; // AVL tree
 
     cout << "S1's course plan -- preorder list format:" << endl;
